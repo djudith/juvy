@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="./assets/js/juvy.templater.js"></script>
+<script>document.write(head)</script>
+
+
+<!-- Body -->
+
+
+
+
+
+
+<div class="container " style="height: 100vh;">
+    <a class=" float-left position-fixed btn-floating waves-effect waves-light purple darken-4 mt-4" href="index.html"><i
+            class="material-icons">arrow_back</i></a>
+    <div class=" p-3 text-center ">
+        <img src="./assets/img/juvy.png" class="mt-5 responsive-img w-25 " style="max-width:300px">
+        <h4> Log In</h4>
+        <br>
+        <form id="loginForm">
+            <div class="row">
+                <div class="col l3"></div>
+                <div class="col l6">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">account_circle</i>
+                            <input id="username" autocomplete="off" type="text" class="validate" required>
+                            <label for="username">Username</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            <input id="password" autocomplete="off" type="password" class="validate" required>
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="col s12">
+                            <!-- <button class="btn waves-effect waves-light light-blue darken-1" type="submit" name="action">Login
+                                <i class="material-icons right">send</i>
+                            </button> -->
+                            <a href="home.html" class="btn waves-effect waves-light light-blue darken-1">Login
+                                <i class="material-icons right">send</i>
+                            </a>
+                        </div>
+                        <div class="col s12">
+                            <br>
+                            <br>
+                            <a class="mt-4 modal-trigger" href="#forgotModal">Forgot Password?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="forgotModal" class="modal ">
+    <div class="modal-content">
+        <p class="font-weight-bold">Forgot Password</p>
+        <p>If you have forgotten your password, please enter your email below and you will receive an email that
+            includes the instructions to reset your password.</p>
+        <form id="forgotForm">
+            <div class="input-field col s12">
+                <input type="email" id="email" autocomplete="off" class="validate">
+                <label for="email">Email</label>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Send</a>
+    </div>
+</div>
+
+
+
+
+<!-- End of Body -->
+
+
+
+
+
+
+
+<script>document.write(foot)</script>
