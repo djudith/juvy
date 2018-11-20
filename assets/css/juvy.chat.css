@@ -1,0 +1,73 @@
+    .chat-container {
+        padding-left: 15px;
+        padding-right: 15px;
+        padding-bottom: 60px;
+        /* background: url('../img/pattern-bg.png'); */
+        overflow-y: auto;
+        min-height: 80vh;
+    }
+
+    .chat-container::after {
+        content: "";
+        background: url('../img/pattern-bg.png');
+        opacity: 0.08;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        position: fixed;
+        z-index: -1;
+    }
+
+    .baloon1,
+    .baloon2 {
+        margin-top: 10px !important;
+        /* margin-bottom: 5px !important; */
+        padding: .5em;
+    }
+
+    .baloon1 {
+        /* For browsers that do not support gradients */
+        background-color: #e9e9e9;
+        /* Standard syntax (must be last) */
+        background-image: linear-gradient(to bottom left, #e9e9e9, #f1f1f1);
+        color: #000 !important;
+        border-radius: 20px 20px 3px 20px;
+        display: block;
+        max-width: 75%;
+        padding: 7px 13px 7px 13px;
+        float: right
+    }
+
+    .baloon1:before {
+        /* content: attr(data-is); */
+        position: absolute;
+        right: 15px;
+        bottom: -0.8em;
+        display: block;
+        font-size: .750rem;
+        color: rgba(84, 110, 122, 1.0);
+    }
+
+    .baloon2 {
+        /* For browsers that do not support gradients */
+        background-color: #039be5 ;
+        /* Standard syntax (must be last) */
+        background-image: linear-gradient(to bottom left, #039be5 , #8e24aa );
+        color: #fff !important;
+        border-radius: 20px 20px 20px 3px;
+        display: block;
+        max-width: 75%;
+        padding: 7px 13px 7px 13px;
+        float: left;
+    }
+
+    .baloon2:before {
+        /* content: attr(data-is); */
+        position: absolute;
+        left: 13px;
+        bottom: -0.8em;
+        display: block;
+        font-size: .750rem;
+        color: rgba(84, 110, 122, 1.0);
+    }

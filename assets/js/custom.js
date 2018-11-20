@@ -1,5 +1,10 @@
 $(document).ready(function () {
     $('.modal').modal();
-    $('.tabs').tabs();
+    $('.home-tabs').tabs({
+        // 'swipeable': true,
+        'onShow': function(f){
+            $('.brand-logo').html($(f).data('page'))
+        },
+    });
     $('.sidenav').sidenav();
 });

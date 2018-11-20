@@ -5094,7 +5094,7 @@ small {
 
 .tabs .tab a:hover, .tabs .tab a.active {
   background-color: transparent;
-  color: #039be5;
+  color: #8e24aa  ;
 }
 
 .tabs .tab.disabled a,
@@ -5107,7 +5107,7 @@ small {
   position: absolute;
   bottom: 0;
   height: 2px;
-  background-color: #f6b2b5;
+  background-color: #8e24aa ;
   will-change: left, right;
 }
 
