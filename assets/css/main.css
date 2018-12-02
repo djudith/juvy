@@ -1,10 +1,24 @@
 @font-face {
-    font-family: 'Montserrat';
-    src: url('./font/Montserrat-Regular.ttf');
+    /* font-family: 'Montserrat';
+    src: url('./font/Montserrat-Regular.ttf'); */
+    font-family: 'SF';
+    src: url('./font/SFProDisplay-Light.ttf');
 }
 
 body {
-    font-family: 'Montserrat';
+    font-family: 'SF';
+}
+
+.sidenav-back {
+    float: left;
+    position: relative;
+    z-index: 1;
+    height: 56px;
+    margin: 0 18px;
+}
+
+:disabled {
+    cursor: no-drop !important;
 }
 
 .bottom_tabs {
@@ -27,9 +41,96 @@ body {
 }
 
 .bg-gradient {
-    height: 200px;
     /* For browsers that do not support gradients */
-    background-color: #039be5  ;
+    background-color: #7bc6cc;
     /* Standard syntax (must be last) */
-    background-image: linear-gradient(to bottom left, #039be5  ,#8e24aa );
+    /* background-image: linear-gradient(to bottom left, #039be5, #8e24aa); */
+    /* background-image: linear-gradient(to bottom left, #4892ad, #81659e); */
+    background-image: linear-gradient(to left, #7bc6cc, #Be93c5);
+}
+
+.bg-theme-blue {
+    background: #7bc6cc !important;
+}
+
+.bg-theme-purple {
+    background: #Be93c5 !important;
+}
+
+.bg-theme-gradient {
+    background-color: #7bc6cc;
+    background-image: linear-gradient(to left, #7bc6cc, #Be93c5);
+    background-image: -moz-linear-gradient(to left, #7bc6cc, #Be93c5);
+}
+
+.waves-effect.waves-theme-gradient .waves-ripple {
+    background-color: #7bc6cc;
+    background-image: linear-gradient(to left, #7bc6cc, #Be93c5);
+    background-image: -moz-linear-gradient(to left, #7bc6cc, #Be93c5);
+}
+
+.bg-theme-success {
+    background-color: #00b09b;
+    background-image: linear-gradient(to right, #00b09b, #96c93d);
+    background-image: -moz-linear-gradient(to right, #00b09b, #96c93d);
+}
+
+.bg-theme-danger {
+    background-color: #b24545;
+    background-image: linear-gradient(to right, #b24545, #f15f79);
+    background-image: -moz-linear-gradient(to right, #b24545, #f15f79);
+}
+
+.bg-theme-warning {
+    background-color: #f46b45;
+    background-image: linear-gradient(to right, #f46b45, #eea849);
+    background-image: -moz-linear-gradient(to right, #f46b45, #eea849);
+}
+
+.bg-theme-info {
+    background-color: #6190e8;
+    background-image: linear-gradient(to right, #6190e8, #a7bfe8);
+    background-image: -moz-linear-gradient(to right, #6190e8, #a7bfe8);
+}
+
+.home-bg {
+    /* The image used */
+    background-image: url("../img/gradient-bg.png");
+    /* Full height */
+    height: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.vh-100 {
+    height: 100vh !important;
+}
+
+.loadingOverlay {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    z-index: 999;
+    background-color: #7bc6cc;
+    background-image: linear-gradient(to left, #7bc6cc, #Be93c5);
+    background-image: -moz-linear-gradient(to left, #7bc6cc, #Be93c5);
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+    color: rgb(191, 120, 202) !important;
+}
+
+.bottom_tabs .indicator {
+    height: 5px;
+    background-color: #7bc6cc;
+    background-image: linear-gradient(to left, #7bc6cc, #Be93c5);
+    background-image: -moz-linear-gradient(to left, #7bc6cc, #Be93c5);
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }

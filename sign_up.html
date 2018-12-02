@@ -11,35 +11,40 @@
 
 
 <div class="container " style="height: 100vh;">
-  <a class=" float-left position-fixed btn-floating waves-effect waves-light purple darken-1 mt-4" href="index.html"><i class="material-icons">arrow_back</i></a>
+  <a class=" float-left position-fixed btn-floating waves-effect waves-light bg-theme-gradient mt-4" href="index.html"><i
+      class="material-icons">arrow_back</i></a>
   <div class=" p-3 text-center ">
     <img src="./assets/img/juvy.png" class="mt-5 responsive-img w-25 " style="max-width:300px">
     <h4> Sign Up</h4>
     <br>
     <form id="signupForm">
       <div class="row">
-        <div class="col l3"></div>
-        <div class="col l6">
+        <div class="col m3"></div>
+        <div class="col m6">
           <div class="row">
             <div class="input-field col s12">
               <i class="material-icons prefix">account_circle</i>
-              <input id="username" autocomplete="off" type="text" class="validate" required>
+              <input id="username" autocomplete="off" type="text" name="username" class="validate" maxlength="15"
+                required>
               <label for="username">Username</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">email</i>
-              <input id="email" autocomplete="off" type="email" class="validate" required>
+              <input id="email" maxlength="50" autocomplete="off" type="email" name="email" class="validate" required>
               <label for="email">Email</label>
             </div>
             <div class="input-field col s12">
               <i class="material-icons prefix">lock</i>
-              <input id="password" autocomplete="off" type="password" class="validate" required>
+              <input id="password" maxlength="16" autocomplete="off" type="password" name="password" class="validate"
+                required>
               <label for="password">Password</label>
             </div>
           </div>
-          <button class="btn waves-effect waves-light purple darken-1" type="submit" name="action">Register
+          <button class="btn waves-effect waves-light bg-theme-gradient btnSubmit" type="submit" name="action">Register
             <i class="material-icons right">send</i>
           </button>
+          <br><br>
+          <a class="mt-4 modal-trigger" href="log_in.html">Already Have an account? Log in here.</a>
         </div>
       </div>
     </form>
@@ -60,3 +65,41 @@
 
 
 <script>document.write(foot)</script>
+
+<script>
+  $("#signupForm").submit(function (e) {
+    e.preventDefault();
+    const serial = $(this).serialize();
+    $.ajax({
+      type: "post",
+      url: base_url + "main/sign_up",
+      data: serial,
+      beforeSend: function () {
+        $(".btnSubmit").attr('disabled', true);
+      },
+      complete: function () {
+        // $(".btnSubmit").attr('disabled', false);
+      },
+      success: function (data) {
+        if (data.success == 1) {
+          sys_success('Yey! You have successfully registered. Please wait..');
+          localStorage.setItem("userIsLoggedIn", "1");
+          localStorage.setItem("user_id", data.user_id);
+          localStorage.setItem("username", data.info.username);
+          localStorage.setItem("email", data.info.email);
+          sessionStorage.setItem("isLoggedIn", "1");
+          localStorage.setItem('new_member', '1');
+          setTimeout(() => {
+            location.href = "home.html";
+          }, 3000);
+        } else if (data.success == 0) {
+          sys_warning(data.message);
+          $(".btnSubmit").attr('disabled', false);
+        } else {
+          sys_error();
+          $(".btnSubmit").attr('disabled', false);
+        }
+      }
+    });
+  });
+</script>

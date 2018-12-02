@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="./assets/js/juvy.templater.js"></script>
+<script>document.write(head)</script>
+<div class="loadingOverlay">
+    <div class="progress container mt-3">
+        <div class="indeterminate"></div>
+    </div>
+    <i class="material-icons text-white refreshBtn cursor-pointer" style="position:fixed;bottom:15px;right:15px">refresh</i>
+</div>
+<script>document.write(topnav)</script>
+<script>document.write(sidenav)</script>
+
+<!-- Body -->
+
+
+
+<div id="convo" class="current_page" data-page="Shared Thoughts">
+    <div class="container pt-3">
+        <div class="row bg-theme-info white-text note_auto_dismiss" style="display:none">
+            <div class="col s12 p-3">
+                <a onclick="$(this).parent().parent().fadeOut();" class="waves-effect waves-teal btn-flat right"><i
+                        class="material-icons">close</i></a>
+                Below are the list of posts you shared in the feed. Feel free to manage them.
+            </div>
+        </div>
+        <div class="feed_container">
+            <div class="progress blue lighten-4">
+                <div class="indeterminate purple darken-1"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--End Body -->
+<script>document.write(foot)</script>
+
+<script src="./assets/js/app/shared_thoughts.js"></script>

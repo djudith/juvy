@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="./assets/js/juvy.templater.js"></script>
+<script>document.write(head)</script>
+<div class="loadingOverlay">
+    <div class="progress container mt-3">
+        <div class="indeterminate"></div>
+    </div>
+    <i class="material-icons text-white refreshBtn cursor-pointer" style="position:fixed;bottom:15px;right:15px">refresh</i>
+</div>
+<script>document.write(backnav)</script>
+<script>document.write(sidenav)</script>
+
+<!-- Body -->
+
+
+
+<div id="convo" class="current_page" data-page="Edit Post" data-back="my_thoughts.html">
+    <div class="container pt-5">
+        <form id="editForm">
+            <div class="row">
+                <div class="col s12 m3"></div>
+                <div class="col s12 m6">
+                    <div class="row">
+                        <div class="input-field col s12 mb-0">
+                            <textarea id="textarea1" class="materialize-textarea" data-length="300" maxlength="300"
+                                name="feed_content" required></textarea>
+                            <label for="textarea1">Compose your thoughts here..</label>
+                        </div>
+                        <p class="col s12">
+                            <label>
+                                <input type="checkbox" class="chkbox_anonymous" />
+                                <span>Share as anonymous</span>
+                            </label>
+                        </p>
+                    </div>
+                    <input type="hidden" name="feed_op" class="feed_op">
+                    <div class="text-center">
+                        <button class="btn waves-effect waves-light bg-theme-gradient btnSubmit" type="submit" name="action">Save
+                            Changes
+                            <i class="material-icons right">save</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!--End Body -->
+<script>document.write(foot)</script>
+
+<script src="./assets/js/app/edit_feed.js"></script>

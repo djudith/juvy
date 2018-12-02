@@ -1,65 +1,175 @@
 <!DOCTYPE html>
 <script type="text/javascript" src="./assets/js/juvy.templater.js"></script>
 <script>document.write(head)</script>
+<div class="loadingOverlay">
+    <div class="progress container mt-3">
+        <div class="indeterminate"></div>
+    </div>
+    <i class="material-icons text-white refreshBtn cursor-pointer" style="position:fixed;bottom:15px;right:15px">refresh</i>
+</div>
 <script>document.write(topnav)</script>
 <script>document.write(sidenav)</script>
 
 <!-- Body -->
 
 
-<link rel="stylesheet" href="./assets/css/juvy.chat.css">
 
-<div id="convo" data-page="Chat">
-    <div class="chat-container">
-        <div class="baloon1" data-is="You - 3:20 pm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore sunt nobis non pariatur modi officia,
-            sequi repudiandae ipsam dolores velit doloremque molestiae consequatur ullam excepturi, nostrum harum
-            perspiciatis natus impedit!
+
+
+
+<!-- CHAT -->
+<div id="convo" class="current_page" data-page="Chat">
+    <div class="container pb-5">
+        <p class="text-muted">Recent conversations with Juvy</p>
+        <!-- <a href="#RecentConvoModal" class="modal-trigger"> -->
+        <div class="card">
+            <div class="card-content">
+                <span class="badge bg-theme-gradient white-text">AUG 21</span>
+                <p><time class="timeago" datetime="2018-08-21T14:00:00Z">Aug 21, 2018</time>, I was feeling</p>
+                <p class="font-weight-bold">Stressed</p>
+                <p>Then, I ended up feeling</p>
+                <p class="font-weight-bold">Stressed</p>
+            </div>
         </div>
-        <div class="baloon2" data-is="Yusuf - 3:22 pm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa alias sint quam quos. Tempora, aliquid error
-            reiciendis quibusdam, dolorum iusto dignissimos facilis dolores cum unde voluptate nobis? Minima, nostrum
-            alias.
-        </div>
-        <div class="baloon2" data-is="Yusuf - 3:22 pm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa alias sint quam quos. Tempora, aliquid error
-            reiciendis quibusdam, dolorum iusto dignissimos facilis dolores cum unde voluptate nobis? Minima, nostrum
-            alias.
+        <!-- </a> -->
+    </div>
+    <a href="chat.html" id="chatBtn" class="btn-floating btn-large waves-effect waves-light bg-theme-gradient pulse "
+        style="position:fixed;bottom:65px;right:15px">
+        <i class="material-icons">chat</i>
+    </a>
+    <!-- Tap Target Structure -->
+    <div class="tap-target bg-theme-gradient text-white" data-target="chatBtn">
+        <div class="tap-target-content">
+            <h5 class="text-right font-weight-bold">Chat with Juvy</h5>
+            <p class="text-right">Tap here to start a conversation with Juvy. You can always talk to juvy anytime
+                :)</p>
         </div>
     </div>
 </div>
+<!-- CHAT -->
 
 
 
-<div id="feed" data-page="Feed">
+
+
+<!-- FEED -->
+<div id="feed" class="current_page" data-page="Feed">
+    <div class="container pb-5">
+        <p class="text-muted">Latest shared thoughts from other users</p>
+        <div class="feed_container">
+            <div class="progress blue lighten-4">
+                <div class="indeterminate purple darken-1"></div>
+            </div>
+        </div>
+        <!-- <a href="#viewPostModal" class="modal-trigger">
+            <div class="card">
+                <div class="card-content">
+                    <p class="">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quis nam, accusantium aliquid
+                        hic
+                        cupiditate numquam sequi ullam, maiores magni, sed repellendus beatae nisi nihil? Fugiat
+                        mollitia
+                        cumque voluptate incidunt voluptatem?</p>
+                    <div class="row mb-0 mt-2">
+                        <div class="grey-text col s6 p-0"><time class="timeago" datetime="2018-08-21T14:00:00Z">Aug 21,
+                                2018</time></div>
+                        <div class="grey-text col s6 p-0 text-right">By: Poster</div>
+                    </div>
+                </div>
+            </div>
+        </a> -->
+    </div>
+    <a href="compose_feed.html" id="addFeedBtn" class="btn-floating btn-large waves-effect waves-light bg-theme-gradient pulse "
+        style="position:fixed;bottom:65px;right:15px">
+        <i class="material-icons">edit</i>
+    </a>
+    <!-- Tap Target Structure -->
+    <div class="tap-target bg-theme-gradient text-white" data-target="addFeedBtn">
+        <div class="tap-target-content">
+            <h5 class="text-right font-weight-bold">Share your thoughts</h5>
+            <p class="text-right">Tap here to start a conversation with Juvy. You can always talk to juvy anytime
+                :)</p>
+        </div>
+    </div>
+</div>
+<!-- FEED -->
+
+
+
+
+<!-- SECRETS -->
+<div id="secrets" class="current_page" data-page="Secrets">
     <div class="container">
         <div class="progress blue lighten-4">
             <div class="indeterminate purple darken-1"></div>
         </div>
     </div>
 </div>
+<!-- SECRETS -->
 
 
-<div id="library" data-page="Library">
+
+
+
+<!-- Hopeline -->
+<div id="hopeline" class="current_page" data-page="Hopeline">
     <div class="container">
         <div class="progress blue lighten-4">
             <div class="indeterminate purple darken-1"></div>
         </div>
     </div>
 </div>
+<!-- Hopeline -->
 
 
-<div id="secrets" data-page="Secrets">
-    <div class="container">
+
+
+
+
+<!-- Modals -->
+<div id="RecentConvoModal" class="modal">
+    <div class="modal-content">
+        <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">Close</a>
+    </div>
+</div>
+
+<div id="viewPostModal" class="modal modal-notdismissible modal-fixed-footer">
+    <div class="modal-content">
         <div class="progress blue lighten-4">
             <div class="indeterminate purple darken-1"></div>
         </div>
     </div>
+    <div class="modal-footer ">
+        <a class="btn-flat btnclosemodalpost disabled"disabled >Close</a>
+    </div>
 </div>
+
+<div id="new_memberModal" class="modal modal-dismissable">
+    <div class="modal-content">
+        <h4>Hi!</h4>
+        <p>Welcome my new friend! Im Juvy, from now on, I am one of your trustworthy companion. You can freely share
+            your thoughts and feelings to me. </p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Ok</a>
+    </div>
+</div>
+
+
+
+
+
 
 
 <!--End Body -->
-
-
 <script>document.write(bottom_nav)</script>
 <script>document.write(foot)</script>
+
+
+
+
+<script src="./assets/js/app/home.js"></script>
+<script src="./assets/js/app/chat.js"></script>
+<script src="./assets/js/app/feed.js"></script>

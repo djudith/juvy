@@ -1,0 +1,38 @@
+[
+    {
+        "pattern": "greet",
+        "template": [
+            "Good Day! What do you want to do?"
+        ],
+        "answers": [
+            {
+                "pattern": "listen",
+                "display": "Listen to music"
+            },
+            {
+                "pattern": "share",
+                "display": "Share something"
+            },
+            {
+                "pattern": "watch",
+                "display": "Watch Video"
+            }
+        ]
+    },
+    {
+        "pattern": "listen",
+        "template": [
+            "What genre of music do you want to listen to?"
+        ],
+        "answers": [
+            {
+                "pattern": "listen_to_pop",
+                "display": "Pop"
+            },
+            {
+                "pattern": "listen_to_gospel",
+                "display": "Gospel"
+            }
+        ]
+    }
+]

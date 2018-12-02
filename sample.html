@@ -1,0 +1,122 @@
+<script>
+  const aiml = [
+    {
+      "pattern": "greet",
+      "returnForm": "button",
+      "template": [
+        "Good Day! What do you want to do?",
+      ],
+      "answers": [
+        {
+          "pattern": "listen",
+          "display": "Listen to music"
+        },
+        {
+          "pattern": "share",
+          "display": "Share something"
+        },
+        {
+          "pattern": "watch",
+          "display": "Watch Video"
+        }
+      ]
+    },
+    {
+      "pattern": "listen",
+      "returnForm": "button",
+      "template": [
+        "What genre of music do you want to listen to?"
+      ],
+      "answers": [
+        {
+          "pattern": "listen_to_pop",
+          "display": "Pop"
+        },
+        {
+          "pattern": "listen_to_gospel",
+          "display": "Gospel"
+        }
+      ]
+    },
+    {
+      "pattern": "listen_to_pop",
+      "returnForm": "button",
+      "template": [
+        "I have prepared a list of pop music to you. Choose 1 below."
+      ],
+      "answers": [
+        {
+          "pattern": "listen_to_pop_track1",
+          "display": "Pop Song #1"
+        },
+        {
+          "pattern": "listen_to_pop_track2",
+          "display": "Pop Song #2"
+        }
+      ]
+    },
+    {
+      "pattern": "listen_to_pop_track1",
+      "returnForm": "audio",
+      "template": [
+        "Pop Song #1 is now playing"
+      ],
+      "answers": [
+        {
+          "pattern": "",
+          "display": ""
+        },
+      ]
+    }
+  ];
+
+
+  function search(arr, val = '') {
+    for (i = 0; i < arr.length; i++) {
+      if (arr[i].pattern == val) {
+        console.log(arr[i])
+        return arr[i];
+      }
+    }
+  }
+
+
+
+
+  function juvy_say(words, answers, returnForm) {
+    console.log(returnForm)
+    document.body.innerHTML += 'Juvy: ' + words + "<br>";
+    for (var i = 0; i < answers.length; i++) {
+      if (returnForm == "button") {
+        document.body.innerHTML += "<button onclick=\"user_choose('" + answers[i].pattern + "','" + answers[i].display + "')\">" + answers[i].display + "</button> ";
+      }
+      if (returnForm == "audio") {
+        document.body.innerHTML += `<audio controls>
+                                      <source src="horse.ogg" type="audio/ogg">
+                                    </audio>`;
+      }
+    }
+    document.body.innerHTML += "<br><br>";
+  }
+
+  function user_choose(pattern, display) {
+    document.body.innerHTML += 'Me: ' + display + "<br><br>";
+    let data = search(aiml, pattern);
+    let say = data['template'][Math.floor((Math.random() * data['template'].length))];
+    juvy_say(say, data['answers'], data['returnForm']);
+  }
+
+
+
+
+
+  function startconvo() {
+    let data = search(aiml, 'greet');
+    let say = data['template'][Math.floor((Math.random() * data['template'].length))];
+    juvy_say(say, data['answers'], data['returnForm']);
+  }
+</script>
+
+
+<button onclick="startconvo()">Start convo</button>
+<br><br>
