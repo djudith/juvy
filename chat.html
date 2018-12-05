@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 <script type="text/javascript" src="./assets/js/juvy.templater.js"></script>
+<style>
+    ::-webkit-scrollbar{width:2px;height:2px;}
+    ::-webkit-scrollbar-button{width:2px;height:2px;}
+    .scrolling-wrapper {
+        overflow-x: scroll;
+        overflow-y: hidden;
+        white-space: nowrap;
+        padding-bottom: 10px;
+    }
+    .scrolling-wrapper .answerCon {
+    display: inline-block;
+    }
+</style>
 <script>document.write(head)</script>
 <script>document.write(convo_topnav)</script>
 <!-- <script>document.write(sidenav)</script> -->
@@ -26,19 +39,19 @@
         </div> -->
     </div>
 
-    <div id="answerContainerOption" class="container text-center d-flex justify-content-end flex-wrap mb-2">
 
+    <div id="answerContainerOption" class="scrolling-wrapper container-fluid text-right">
     </div>
 
-    <!-- <a href="#answerModal" class="baloon-answer modal-trigger scale-transition answerModalTrigger" style="display:none">
-        Answer...
-    </a> -->
 </div>
 
 <div class=" play_music_bg bg-theme-gradient  ">
     <div class=" vh-100 vw-100 d-flex align-items-center justify-content-center">
+        <div class="text-center">
+            <p class="white-text vw-100">Just leave your screen on</p>
+            <i class="material-icons large cursor-pointer stopAllMusic">stop</i>
+        </div>
         <!-- <button href="#" class="waves-effect waves-light btn"> -->
-        <i class="material-icons large cursor-pointer stopAllMusic">stop</i>
         <!-- <i class="material-icons large cursor-pointer">pause</i> -->
         <!-- </button> -->
     </div>
@@ -46,9 +59,14 @@
 
 
 <!-- Modal Structure -->
-<div id="musicModal" class="modal modal-notdismissible bottom-sheet">
+<div id="musicModal" class="modal modal-notdismissible bottom-sheet modal-fixed-footer">
     <div class="modal-content">
         <!-- <button class=" chat_user_btn waves-effect waves-theme-gradient play_music_btn">Got to believe in magic</button> -->
+    </div>
+    <div class="modal-footer">
+        <button data-pattern="stop_audio_play" data-display="Done Listening" class="btn-flat waves-effect waves-theme-gradient user_choose_btn">
+            Done Listening
+        </button>
     </div>
 </div>
 

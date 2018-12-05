@@ -117,9 +117,12 @@ $(function () {
                                     </a>`;
                 }
                 if (answers[i].returnForm == "button") {
-                    answers_html += `<a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_choose_btn waves-effect waves-theme-gradient">
+                    // answers_html += `<div class=" d-inline-block"><a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_choose_btn waves-effect waves-theme-gradient">
+                    //                     ${answers[i].display}
+                    //                 </a></div>`;
+                    answers_html += `<div class="answerCon"><a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_choose_btn waves-effect waves-theme-gradient">
                                         ${answers[i].display}
-                                    </a>`;
+                                    </a></div>`;
                 }
                 if (answers[i].returnForm == "hyperlink") {
                     answers_html += `<a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_choose_a waves-effect waves-theme-gradient">
@@ -152,34 +155,32 @@ $(function () {
 
 
     // music
-    const music_array = ['popMusic1', 'popMusic2', 'popMusic3'];
+    const music_array = ['Got_to_believe_in_magic', 'Baby_I_Love_You_So', 'Candy_Girl'];
 
     const music_json = {
-        popMusic1: {
-            id: "popMusic1",
+        Got_to_believe_in_magic: {
+            id: "Got_to_believe_in_magic",
             mp3: "./assets/music/1.mp3",
         },
-        popMusic2: {
-            id: "popMusic2",
+        Baby_I_Love_You_So: {
+            id: "Baby_I_Love_You_So",
             mp3: "./assets/music/2.mp3",
         },
-        popMusic3: {
-            id: "popMusic3",
+        Candy_Girl: {
+            id: "Candy_Girl",
             mp3: "./assets/music/3.mp3",
         },
     };
     $.mbAudio.sounds = music_json;
 
     $(document).ready(displayAllMusic);
-    // $.mbAudio.play('popMusic1')
+
+
     function displayAllMusic() {
-        var content = '';
+        var content = '<p class="font-weight-bold mt-0">List of music just for you. Choose and tap any songs to listen to: </p>';
         for (var i = 0; i < music_array.length; i++) {
-            content += `<button class=" chat_user_btn waves-effect waves-theme-gradient play_music_btn" onclick="$.mbAudio.play('${music_array[i]}')">${music_array[i]}</button>`;
+            content += `<button class=" chat_user_btn waves-effect waves-theme-gradient play_music_btn" onclick="$.mbAudio.play('${music_array[i]}')">${music_array[i].replace(/_/g," ")}</button>`;
         }
-        content += `<a data-pattern="stop_audio_play" data-display="Done Listening" class="chat_user_btn user_choose_btn waves-effect waves-theme-gradient">
-            Done Listening
-        </a>`;
         $("#musicModal > .modal-content").append(content);
     }
 
