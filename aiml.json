@@ -2,18 +2,22 @@
     {
         "pattern": "greet",
         "template": [
-            "Good Day! What do you want to do?"
+            "Good Day! >> What do you want to do? ",
+            "Hey there! >> It's good to see you again! >> Is there anything you want to do? "
         ],
         "answers": [
             {
+                "returnForm": "button",
                 "pattern": "listen",
                 "display": "Listen to music"
             },
             {
+                "returnForm": "button",
                 "pattern": "share",
                 "display": "Share something"
             },
             {
+                "returnForm": "button",
                 "pattern": "watch",
                 "display": "Watch Video"
             }
@@ -22,16 +26,120 @@
     {
         "pattern": "listen",
         "template": [
-            "What genre of music do you want to listen to?"
+            "I have list of genre here. >> What genre of music do you want to listen to?",
+            "That's good! Music will surely help you boost your mood. >> What genre of music do you like?"
         ],
         "answers": [
             {
+                "returnForm": "button",
                 "pattern": "listen_to_pop",
                 "display": "Pop"
             },
             {
+                "returnForm": "button",
                 "pattern": "listen_to_gospel",
                 "display": "Gospel"
+            }
+        ]
+    },
+    {
+        "pattern": "listen_to_pop",
+        "template": [
+            "I have prepared a list of pop music to you >> Choose 1 below."
+        ],
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "listen_to_pop_track1",
+                "display": "Pop Song #1"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "listen_to_pop_track2",
+                "display": "Pop Song #2"
+            }
+        ]
+    },
+    {
+        "pattern": "listen_to_pop_track1",
+        "template": [
+            "Pop Song #1 is now playing."
+        ],
+        "answers": [
+            {
+                "returnForm": "audio",
+                "pattern": "",
+                "display": "<audio style='display:none;' id='listen_to_pop_track1' controls><source src='./assets/music/1.mp3' type='audio/mp3'></audio>"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "stop_audio_play",
+                "display": "Done Listening"
+            }
+        ]
+    },
+    {
+        "pattern": "stop_audio_play",
+        "template": [
+            "Thats great! How do you feel now?"
+        ],
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "feel_better",
+                "display": "I feel better now"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "still_the_same",
+                "display": "Still the same"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "i_dont_know",
+                "display": "I dont know"
+            }
+        ]
+    },
+    {
+        "pattern": "feel_better",
+        "template": [
+            "Im glad to hear that! Do you want to do something else?"
+        ],
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "listen",
+                "display": "Listen to music"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "share",
+                "display": "Share something"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "watch",
+                "display": "Watch Video"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "endConvo",
+                "display": "Nothing more"
+            }
+        ]
+    },
+    {
+        "pattern": "endConvo",
+        "template": [
+            "I am glad you talked to me >> You always have me >> Just drop a message anytime!",
+            "Got it. Later then >> Just chat me whenever you are free my friend"
+        ],
+        "answers": [
+            {
+                "returnForm": "hyperlink",
+                "pattern": "home.html",
+                "display": "End Conversation"
             }
         ]
     }

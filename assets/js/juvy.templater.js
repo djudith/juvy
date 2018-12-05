@@ -75,8 +75,8 @@ const sidenav = `
         <img src="./assets/img/gradient-bg.png" class=" responsive-img" >
         </div>
        <!-- <a href="#user"><i class="material-icons medium white-text">account_circle</i></a> -->
-        <a href="#name"><span class="name white-text">Judith B. Delgado</span></a>
-        <a href="#email"><span class=" email white-text">djudith@gmail.com</span></a>
+        <a href="account.html"><span class="name white-text">Judith B. Delgado</span></a>
+        <a href="account.html"><span class=" email white-text">djudith@gmail.com</span></a>
     </div>
     </li>
     <li><a class="waves-effect" href="home.html"><i class="material-icons">home</i>Home</a></li>

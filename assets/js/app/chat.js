@@ -1,75 +1,43 @@
 $(function () {
-    const aiml = [
-        {
-            "pattern": "greet",
-            "returnForm": "button",
-            "template": [
-                "Good Day! What do you want to do?",
-            ],
-            "answers": [
-                {
-                    "pattern": "listen",
-                    "display": "Listen to music"
-                },
-                {
-                    "pattern": "share",
-                    "display": "Share something"
-                },
-                {
-                    "pattern": "watch",
-                    "display": "Watch Video"
-                }
-            ]
-        },
-        {
-            "pattern": "listen",
-            "returnForm": "button",
-            "template": [
-                "What genre of music do you want to listen to?"
-            ],
-            "answers": [
-                {
-                    "pattern": "listen_to_pop",
-                    "display": "Pop"
-                },
-                {
-                    "pattern": "listen_to_gospel",
-                    "display": "Gospel"
-                }
-            ]
-        },
-        {
-            "pattern": "listen_to_pop",
-            "returnForm": "button",
-            "template": [
-                "I have prepared a list of pop music to you. Choose 1 below."
-            ],
-            "answers": [
-                {
-                    "pattern": "listen_to_pop_track1",
-                    "display": "Pop Song #1"
-                },
-                {
-                    "pattern": "listen_to_pop_track2",
-                    "display": "Pop Song #2"
-                }
-            ]
-        },
-        {
-            "pattern": "listen_to_pop_track1",
-            "returnForm": "audio",
-            "template": [
-                "Pop Song #1 is now playing"
-            ],
-            "answers": [
-                {
-                    "pattern": "",
-                    "display": ""
-                },
-            ]
-        }
-    ];
 
+    const aiml = (function () {
+        var json = null;
+        $.ajax({
+            'async': false,
+            'global': false,
+            'url': "./aiml.json",
+            'dataType': "json",
+            'success': function (data) {
+                json = data;
+            }
+        });
+        return json;
+    })();
+    const fallback_response = {
+        "pattern": "fallback_response",
+        "template": [
+            "Oops! >> I didn't get that >> Wanna do something else? ",
+            "Hmm, I've never heard that before >> Not sure how to respond to that >> Wanna do something else?",
+            "Sorry, I was trying to charge my phone >> What were you trying to say?"
+        ],
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "listen",
+                "display": "Listen to music"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "share",
+                "display": "Share something"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "watch",
+                "display": "Watch Video"
+            }
+        ]
+    };
 
 
 
@@ -77,14 +45,10 @@ $(function () {
         // return 'Are you sure you want to leave?';
     });
 
-
     $(document).ready(function () {
         let data = search(aiml, 'greet');
         let say = data['template'][Math.floor((Math.random() * data['template'].length))];
-        setTimeout(() => {
-            juvy_say(say, data['answers'], data['returnForm']);
-            $(".answerModalTrigger").fadeIn();
-        }, 1000);
+        juvy_say(say, data['answers'], data['returnForm']);
     });
 
 
@@ -96,12 +60,20 @@ $(function () {
                 return arr[i];
             }
         }
+        return fallback_response;
     }
 
-    $("#answerModal").delegate(".user_choose_btn","click",function(){
+    $("#answerModal, #answerContainerOption").delegate(".user_choose_btn", "click", function () {
+        $("#answerContainerOption").empty()
         var pattern = $(this).data('pattern');
         var display = $(this).data('display');
         user_choose(pattern, display);
+    })
+
+    $("#answerModal, #answerContainerOption").delegate(".user_choose_a", "click", function () {
+        $("#answerContainerOption").empty()
+        var pattern = $(this).data('pattern');
+        location.href = pattern
     })
 
     function user_choose(pattern, display) {
@@ -112,33 +84,59 @@ $(function () {
 
         let data = search(aiml, pattern);
         let say = data['template'][Math.floor((Math.random() * data['template'].length))];
-        setTimeout(() => {
-            juvy_say(say, data['answers'], data['returnForm']);
-        }, 1000);
+        juvy_say(say, data['answers'], pattern);
     }
-
-    function juvy_say(words, answers, returnForm) {
-
-
-        const html = `<div class="baloon2">${words}</div>`
-        $(".chat-container").append(html)
-
-        let answers_html = '';
-        for (var i = 0; i < answers.length; i++) {
-            if (returnForm == "button") {
-                $(".answerModalTrigger").html('Answer...');
-                answers_html += `<a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="waves-effect waves-theme-gradient btn-flat user_choose_btn">
-                                    ${answers[i].display}
-                                </a> `;
-            }
-            if (returnForm == "audio") {
-                $(".answerModalTrigger").html('Play options...');
-                answers_html += `<audio controls>
-                                <source src="horse.ogg" type="audio/ogg">
-                            </audio>`;
-            }
+    function juvy_say(words, answers, pattern) {
+        var arrwords = words.split(">>"); // make an array out of the string, separator is >>
+        var i = 0, nth = arrwords.length; // used for looping with delay
+        var add_chat_bubble = function () { // function for adding typing animation, then message
+            $(".chat-container").append(`<div class="baloon2 typing_bubble"><img src="./assets/img/typing.gif" width="30"></div>`)
+            setTimeout(() => {
+                $(".typing_bubble").remove();
+                $(".chat-container").append(`<div class="baloon2">${arrwords[i]}</div>`)
+                $("html, body").animate({ scrollTop: $(document).height() }, 500); // force the page to scroll down
+                i++;
+                if (i < nth) { // condition if juvy is done talking or not
+                    add_chat_bubble() // if not yet, still add bubbles
+                } else {
+                    display_answers() // if everything has been said by juvy, now display the choices to user 
+                }
+            }, Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000);
         }
-        $("#answerModal > .modal-content").html(answers_html);
+        var display_answers = function () { //  function for displaying choices after juvy say something.
+            let answers_html = '';
+            let audioPlayFlag = false;
+            for (var i = 0; i < answers.length; i++) {
+                if (answers[i].returnForm == "button") {
+                    answers_html += `<a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_choose_btn waves-effect waves-theme-gradient">
+                                        ${answers[i].display}
+                                    </a>`;
+                }
+                if (answers[i].returnForm == "hyperlink") {
+                    answers_html += `<a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_choose_a waves-effect waves-theme-gradient">
+                                        ${answers[i].display}
+                                    </a>`;
+                }
+                if (answers[i].returnForm == "audio") {
+                    $("#answerContainerOption").hide();
+                    answers_html += answers[i].display;
+                    audioPlayFlag = true
+                }
+            }
+            $("#answerContainerOption").html(answers_html);
+            if (audioPlayFlag) {
+                setTimeout(() => {
+                    var x = document.getElementById(pattern);
+                    x.play();
+                }, 500);
+                setTimeout(() => {
+                    $("#answerContainerOption").show();
+                    $("html, body").animate({ scrollTop: $(document).height() }, 500);
+                }, 3000);
+            }
+            $("html, body").animate({ scrollTop: $(document).height() }, 500); // force page to scroll down
+        }
+        add_chat_bubble(); // call the function for adding chat bubble
     }
 
 })

@@ -69,7 +69,6 @@
         color: rgba(84, 110, 122, 1.0);
     }
 
-
     .baloon2 {
         background-color: #7bc6cc;
         background-image: linear-gradient(to left, #7bc6cc, #Be93c5);
@@ -82,7 +81,6 @@
         float: left;
     }
 
-    
     .baloon2:before {
         /* content: attr(data-is); */
         position: absolute;
@@ -111,4 +109,13 @@
         width: 100px;
         font-size: .9em;
         overflow-wrap: break-word;
+    }
+
+    .chat_user_btn {
+        font-size: .9em;
+        padding: 8px;
+        margin: 3px;
+        border: 2px solid #7bc6cc;
+        border-radius: 20px;
+        background: white;
     }
