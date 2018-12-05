@@ -79,12 +79,12 @@ const sidenav = `
         <a href="account.html"><span class=" email white-text">djudith@gmail.com</span></a>
     </div>
     </li>
-    <li><a class="waves-effect" href="home.html"><i class="material-icons">home</i>Home</a></li>
-    <li><a class="waves-effect" href="account.html"><i class="material-icons">account_circle</i>My Account</a></li>
-    <li><a class="waves-effect" href="my_thoughts.html"><i class="material-icons">edit</i>Shared Thoughts</a></li>
-    <li><a class="waves-effect" href="index.html"><i class="material-icons">sentiment_very_satisfied</i>Juvy</a></li>
-    <li><a class="waves-effect" href="index.html"><i class="material-icons">settings</i>Settings</a></li>
-    <li><a class="waves-effect logoutBtn" ><i class="material-icons">exit_to_app</i>Logout</a></li>
+    <li><a class="waves-effect waves-theme-gradient" href="home.html"><i class="material-icons">home</i>Home</a></li>
+    <li><a class="waves-effect waves-theme-gradient" href="account.html"><i class="material-icons">account_circle</i>My Account</a></li>
+    <li><a class="waves-effect waves-theme-gradient" href="my_thoughts.html"><i class="material-icons">edit</i>Shared Thoughts</a></li>
+    <!-- <li><a class="waves-effect waves-theme-gradient" href="index.html"><i class="material-icons">sentiment_very_satisfied</i>Juvy</a></li>
+    <li><a class="waves-effect waves-theme-gradient" href="index.html"><i class="material-icons">settings</i>Settings</a></li> -->
+    <li><a class="waves-effect waves-theme-gradient logoutBtn" ><i class="material-icons">exit_to_app</i>Logout</a></li>
 </ul>`;
 
 const bottom_nav = `

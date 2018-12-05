@@ -109,6 +109,19 @@ body {
     height: 100vh !important;
 }
 
+.vw-100 {
+    width: 100vw !important;
+}
+
+@media(max-width:600px) {
+    .vh-sm-5 {
+        height: 5vh !important;
+    }
+    .vh-sm-95 {
+        height: 95vh !important;
+    }
+}
+
 .loadingOverlay {
     position: fixed;
     height: 100vh;
@@ -133,4 +146,13 @@ body {
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.play_music_bg{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    z-index: 1004;
+    display: none;
 }

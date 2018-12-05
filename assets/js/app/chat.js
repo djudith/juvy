@@ -40,7 +40,6 @@ $(function () {
     };
 
 
-
     $(window).bind('beforeunload', function () {
         // return 'Are you sure you want to leave?';
     });
@@ -63,17 +62,22 @@ $(function () {
         return fallback_response;
     }
 
-    $("#answerModal, #answerContainerOption").delegate(".user_choose_btn", "click", function () {
+    $("#musicModal, #answerModal, #answerContainerOption").delegate(".user_choose_btn", "click", function () {
         $("#answerContainerOption").empty()
         var pattern = $(this).data('pattern');
         var display = $(this).data('display');
         user_choose(pattern, display);
+        $("#musicModal, #answerModal").modal('close')
     })
 
     $("#answerModal, #answerContainerOption").delegate(".user_choose_a", "click", function () {
         $("#answerContainerOption").empty()
         var pattern = $(this).data('pattern');
         location.href = pattern
+    })
+
+    $("#musicModal").delegate(".play_music_btn", 'click', function () {
+        $(".play_music_bg").fadeIn()
     })
 
     function user_choose(pattern, display) {
@@ -107,6 +111,11 @@ $(function () {
             let answers_html = '';
             let audioPlayFlag = false;
             for (var i = 0; i < answers.length; i++) {
+                if (answers[i].returnForm == "music_modal") {
+                    answers_html += `<a href="#musicModal" class=" modal-trigger chat_user_btn waves-effect waves-theme-gradient">
+                                        ${answers[i].display}
+                                    </a>`;
+                }
                 if (answers[i].returnForm == "button") {
                     answers_html += `<a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_choose_btn waves-effect waves-theme-gradient">
                                         ${answers[i].display}
@@ -138,5 +147,50 @@ $(function () {
         }
         add_chat_bubble(); // call the function for adding chat bubble
     }
+
+
+
+
+    // music
+    const music_array = ['popMusic1', 'popMusic2', 'popMusic3'];
+
+    const music_json = {
+        popMusic1: {
+            id: "popMusic1",
+            mp3: "./assets/music/1.mp3",
+        },
+        popMusic2: {
+            id: "popMusic2",
+            mp3: "./assets/music/2.mp3",
+        },
+        popMusic3: {
+            id: "popMusic3",
+            mp3: "./assets/music/3.mp3",
+        },
+    };
+    $.mbAudio.sounds = music_json;
+
+    $(document).ready(displayAllMusic);
+    // $.mbAudio.play('popMusic1')
+    function displayAllMusic() {
+        var content = '';
+        for (var i = 0; i < music_array.length; i++) {
+            content += `<button class=" chat_user_btn waves-effect waves-theme-gradient play_music_btn" onclick="$.mbAudio.play('${music_array[i]}')">${music_array[i]}</button>`;
+        }
+        content += `<a data-pattern="stop_audio_play" data-display="Done Listening" class="chat_user_btn user_choose_btn waves-effect waves-theme-gradient">
+            Done Listening
+        </a>`;
+        $("#musicModal > .modal-content").append(content);
+    }
+
+
+    function stopAllMusic() {
+        for (var i = 0; i < music_array.length; i++) {
+            $.mbAudio.pause(music_array[i]);
+        }
+        $(".play_music_bg").fadeOut();
+    }
+
+    $(".stopAllMusic").click(stopAllMusic);
 
 })

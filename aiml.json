@@ -2,8 +2,11 @@
     {
         "pattern": "greet",
         "template": [
-            "Good Day! >> What do you want to do? ",
-            "Hey there! >> It's good to see you again! >> Is there anything you want to do? "
+            "Hi! >> Its nice having you here. >> How can i accompany you? ",
+            "Hey there! >> Good to have you here. >> I'm here to accompany you, choose want you want to do. ",
+            "Hello! Looks like you need someone to talk to >> What do you want to do?",
+            "Yipiiie! A friend a friend who missed me >> Which one of the things below you want to do?",
+            "Hooray! Lets get to know each other more >> Feel free to choose what do you want to do first"
         ],
         "answers": [
             {
@@ -26,19 +29,18 @@
     {
         "pattern": "listen",
         "template": [
-            "I have list of genre here. >> What genre of music do you want to listen to?",
-            "That's good! Music will surely help you boost your mood. >> What genre of music do you like?"
+            "Great! Listening to music is one of the best way to feel better. >> Choose below.",
+            "That's good! Choose what music you want to hear and i'll play it for you!",
+            "Looks like you need something to listen to, Choose below >> I hope it'll help you.",
+            "Wooooaaaah! Music is a good choice >> Select which one below.",
+            "Music is our way to be heard >> Choose music that expresses your feelings.",
+            "It would be nice to listen to music for you to feel better."
         ],
         "answers": [
             {
-                "returnForm": "button",
-                "pattern": "listen_to_pop",
-                "display": "Pop"
-            },
-            {
-                "returnForm": "button",
-                "pattern": "listen_to_gospel",
-                "display": "Gospel"
+                "returnForm": "music_modal",
+                "pattern": "",
+                "display": "Choose Song"
             }
         ]
     },
@@ -104,7 +106,11 @@
     {
         "pattern": "feel_better",
         "template": [
-            "Im glad to hear that! Do you want to do something else?"
+            "Im glad to hear that! Do you want to do something else?",
+            "Looks like i heard a compliment! and It feels good too! >> What else do you want to do.",
+            "Nice!>> It feels like im a big help! Thank you for making me feel that way. >> Here do something else.",
+            "Great! You choose a good song to listen to. >> Its good that I have one. Try something else?",
+            "Hooray! Im happy to hear that. Want to do ther things?"
         ],
         "answers": [
             {
@@ -133,13 +139,16 @@
         "pattern": "endConvo",
         "template": [
             "I am glad you talked to me >> You always have me >> Just drop a message anytime!",
-            "Got it. Later then >> Just chat me whenever you are free my friend"
+            "Got it. Later then >> Just chat me whenever you are free my friend",
+            "Chat you soon. I had a great time talking to you.",
+            "Thanks for the time, i enjoyed chatting with you.",
+            "Its nice talking to you. Till next time my friend."
         ],
         "answers": [
             {
                 "returnForm": "hyperlink",
                 "pattern": "home.html",
-                "display": "End Conversation"
+                "display": "Thank you!"
             }
         ]
     }
