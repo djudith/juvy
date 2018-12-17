@@ -78,6 +78,7 @@ $(function () {
 
     $("#musicModal").delegate(".play_music_btn", 'click', function () {
         $(".play_music_bg").fadeIn()
+        $("p.play_music_title").text($(this).data("songtitle"))
     })
 
     function user_choose(pattern, display) {
@@ -155,20 +156,32 @@ $(function () {
 
 
     // music
-    const music_array = ['Got_to_believe_in_magic', 'Baby_I_Love_You_So', 'Candy_Girl'];
+    const music_array = ['Every_Girl_is_a_Super_Girl', 'Scars_To_Your_Beautiful', 'Fight_Song', 'Stand_By_You','Perfect','Love_Someone'];
 
     const music_json = {
-        Got_to_believe_in_magic: {
-            id: "Got_to_believe_in_magic",
-            mp3: "./assets/music/1.mp3",
+        Every_Girl_is_a_Super_Girl: {
+            id: "Every_Girl_is_a_Super_Girl",
+            mp3: "./assets/music/girlpower.mp3",
         },
-        Baby_I_Love_You_So: {
-            id: "Baby_I_Love_You_So",
-            mp3: "./assets/music/2.mp3",
+        Scars_To_Your_Beautiful: {
+            id: "Scars_To_Your_Beautiful",
+            mp3: "./assets/music/scarstoyourbeautiful.mp3",
         },
-        Candy_Girl: {
-            id: "Candy_Girl",
-            mp3: "./assets/music/3.mp3",
+        Fight_Song: {
+            id: "Fight_Song",
+            mp3: "./assets/music/videoplayback.mp3",
+        },
+        Stand_By_You: {
+            id: "Stand_By_You",
+            mp3: "./assets/music/standbyyou.mp3",
+        },
+        Perfect: {
+            id: "Perfect",
+            mp3: "./assets/music/perfect.mp3",
+        },
+        Love_Someone: {
+            id: "Love_Someone",
+            mp3: "./assets/music/lovesomeone.mp3",
         },
     };
     $.mbAudio.sounds = music_json;
@@ -179,7 +192,8 @@ $(function () {
     function displayAllMusic() {
         var content = '<p class="font-weight-bold mt-0">List of music just for you. Choose and tap any songs to listen to: </p>';
         for (var i = 0; i < music_array.length; i++) {
-            content += `<button class=" chat_user_btn waves-effect waves-theme-gradient play_music_btn" onclick="$.mbAudio.play('${music_array[i]}')">${music_array[i].replace(/_/g," ")}</button>`;
+            content += `<button class=" chat_user_btn waves-effect waves-theme-gradient play_music_btn"
+            data-songtitle="${music_array[i].replace(/_/g," ")}" onclick="$.mbAudio.play('${music_array[i]}')">${music_array[i].replace(/_/g," ")}</button>`;
         }
         $("#musicModal > .modal-content").append(content);
     }
