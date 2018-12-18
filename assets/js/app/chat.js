@@ -1,11 +1,12 @@
 $(function () {
 
+    // json array of the chat 
     const aiml = (function () {
         var json = null;
         $.ajax({
             'async': false,
             'global': false,
-            'url': "./aiml.json",
+            'url': "./assets/json/aiml.json",
             'dataType': "json",
             'success': function (data) {
                 json = data;
@@ -13,6 +14,7 @@ $(function () {
         });
         return json;
     })();
+    // for undefined answer
     const fallback_response = {
         "pattern": "fallback_response",
         "template": [
@@ -76,10 +78,6 @@ $(function () {
         location.href = pattern
     })
 
-    $("#musicModal").delegate(".play_music_btn", 'click', function () {
-        $(".play_music_bg").fadeIn()
-        $("p.play_music_title").text($(this).data("songtitle"))
-    })
 
     function user_choose(pattern, display) {
         const html = `<div class="baloon1">${display}</div>`
@@ -106,7 +104,8 @@ $(function () {
                 } else {
                     display_answers() // if everything has been said by juvy, now display the choices to user 
                 }
-            }, Math.floor(Math.random() * (2000 - 1000 + 1)) + 1000);
+            }, 1);
+            // }, Math.floor(Math.random() * (1500 - 1000 + 1)) + 1000);
         }
         var display_answers = function () { //  function for displaying choices after juvy say something.
             let answers_html = '';
@@ -154,58 +153,5 @@ $(function () {
 
 
 
-
-    // music
-    const music_array = ['Every_Girl_is_a_Super_Girl', 'Scars_To_Your_Beautiful', 'Fight_Song', 'Stand_By_You','Perfect','Love_Someone'];
-
-    const music_json = {
-        Every_Girl_is_a_Super_Girl: {
-            id: "Every_Girl_is_a_Super_Girl",
-            mp3: "./assets/music/girlpower.mp3",
-        },
-        Scars_To_Your_Beautiful: {
-            id: "Scars_To_Your_Beautiful",
-            mp3: "./assets/music/scarstoyourbeautiful.mp3",
-        },
-        Fight_Song: {
-            id: "Fight_Song",
-            mp3: "./assets/music/videoplayback.mp3",
-        },
-        Stand_By_You: {
-            id: "Stand_By_You",
-            mp3: "./assets/music/standbyyou.mp3",
-        },
-        Perfect: {
-            id: "Perfect",
-            mp3: "./assets/music/perfect.mp3",
-        },
-        Love_Someone: {
-            id: "Love_Someone",
-            mp3: "./assets/music/lovesomeone.mp3",
-        },
-    };
-    $.mbAudio.sounds = music_json;
-
-    $(document).ready(displayAllMusic);
-
-
-    function displayAllMusic() {
-        var content = '<p class="font-weight-bold mt-0">List of music just for you. Choose and tap any songs to listen to: </p>';
-        for (var i = 0; i < music_array.length; i++) {
-            content += `<button class=" chat_user_btn waves-effect waves-theme-gradient play_music_btn"
-            data-songtitle="${music_array[i].replace(/_/g," ")}" onclick="$.mbAudio.play('${music_array[i]}')">${music_array[i].replace(/_/g," ")}</button>`;
-        }
-        $("#musicModal > .modal-content").append(content);
-    }
-
-
-    function stopAllMusic() {
-        for (var i = 0; i < music_array.length; i++) {
-            $.mbAudio.pause(music_array[i]);
-        }
-        $(".play_music_bg").fadeOut();
-    }
-
-    $(".stopAllMusic").click(stopAllMusic);
 
 })
