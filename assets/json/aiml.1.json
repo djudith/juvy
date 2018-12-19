@@ -1,0 +1,253 @@
+[
+    {
+        "pattern": "greet",
+        "template": [
+            "Uy! Musta? >> May kwento ka bang gusto i-share? Tara usap tayo, share mo yan. >> Gusto mo makinig ng mga music? >> O baka gusto mo manood ng inspirational videos? >> Sabihin mo lang andito lang ako"
+        ],
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "listen",
+                "display": "Listen to music"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "share",
+                "display": "Share something"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "watch",
+                "display": "Watch Video"
+            }
+        ]
+    },
+    {
+        "pattern": "listen",
+        "template": [
+            "Great! Listening to music is one of the best way to feel better. >> Choose below.",
+            "That's good! Choose what music you want to hear and i'll play it for you!",
+            "Looks like you need something to listen to, Choose below >> I hope it'll help you.",
+            "Wooooaaaah! Music is a good choice >> Select which one below.",
+            "Music is our way to be heard >> Choose music that expresses your feelings.",
+            "It would be nice to listen to music for you to feel better."
+        ],
+        "answers": [
+            {
+                "returnForm": "music_modal",
+                "pattern": "",
+                "display": "Choose Song"
+            }
+        ]
+    },
+        
+    {
+        "pattern": "stop_audio_play",
+        "template": [
+            "Thats great! How do you feel now?"
+        ],
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "feel_better",
+                "display": "I feel better now"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "still_the_same",
+                "display": "Still the same"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "i_dont_know",
+                "display": "I dont know"
+            }
+        ]
+    },
+
+    {
+        "pattern": "share",
+        "template": [
+            "Great! >> Sharing is the best way to feel better. >> What are the factors why you feel sad?",
+            "I'm always here to listen >> No matter what is it. >> What are the factors why you feel sad?",
+            "We always need someone to talk to. >> Feel free to express yourself to me. >> What are the factors why you feel sad?" ,
+            "It takes a lot of courage to tell someone what you feel. >> I'm glad you chose to tell it to me. >> What are the factors why you feel sad? ",
+            "Sometimes the only way to feel better is to share what you feel. >> Let's talk about it. >> what are the factors why you feel sad?"
+        ],
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "family",
+                "display": "Family"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "friends",
+                "display": "Friends"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "classmates",
+                "display": "Classmates"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "teachers",
+                "display": "Teachers"
+            }
+        ]
+    },
+
+    {
+        "pattern": "watch",
+        "template": [
+            "Inspire yourself with different inspirational videos! >> Choose below.",
+            "Yiiipiiie.. Get advices and learn from other people! >> Choose below ",
+            "Woooooh! Get inspired and motivated from watching videos. >> Choose below" ,
+            "Here are some videos that are selected just for you! Be inspired.",
+            "Want get some advices or tips? >> Choose what video might you want to watch."
+        ],
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "video1",
+                "display": "Tips on how to be a better man"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "video2",
+                "display": "How to avoid misunderstanding"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "video3",
+                "display": "Tips on how to review"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "video4",
+                "display": "Advices from introvert"
+            }
+        ]
+    },
+
+    {
+        "pattern": "feel_better",
+        "template": [
+            "Im glad to hear that! Do you want to do something else?",
+            "Looks like i heard a compliment! and It feels good too! >> What else do you want to do.",
+            "Nice!>> It feels like im a big help! Thank you for making me feel that way. >> Here do something else.",
+            "Great! You choose a good song to listen to. >> Its good that I have one. Try something else?",
+            "Hooray! Im happy to hear that. Want to do other things?"
+        ],
+
+        
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "listen",
+                "display": "Listen to music"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "share",
+                "display": "Share something"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "watch",
+                "display": "Watch Video"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "endConvo",
+                "display": "Nothing more"
+            }
+        ]
+    },
+    {
+        "pattern": "still_the_same",
+        "template":[
+            "Ow >> We can still try something else. Choose below.",
+            "Aww >> Dont lose hope >> Let's try to do something else.",
+            "It's OK... >>Feels like you're not in the mood to listen to music >> Try something else.",
+            "Thats OK! >> Sometimes sharing is better, choose 'share something's below",
+            "No problem... >> I understand >> To feel better is not that easy. >> Choose want you want to do next."
+        ],
+
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "listen",
+                "display": "Listen to music"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "share",
+                "display": "Share something"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "watch",
+                "display": "Watch Video"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "endConvo",
+                "display": "That's all for today"
+            }
+        ]
+    },
+
+    {
+        "pattern": "i_dont_know",
+        "template":[
+            "It's fine >> Wanna do something else?",
+            "Dont lose hope! >> Its normal to be confused.>> Let's do something else.",
+            "There's no problem with that >> Its Ok, there are things that i dont know too. >> Try something else.",
+            "Not knowing something is fine >> It's normal because no one knows everything. >> Do something else.",
+            "No problem... >> I understand >> Let's try to work with that."
+        ],
+
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "listen",
+                "display": "Listen to music"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "share",
+                "display": "Share something"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "watch",
+                "display": "Watch Video"
+            },
+            {
+                "returnForm": "button",
+                "pattern": "endConvo",
+                "display": "Maybe Later"
+            }
+        ]
+    },
+   
+    {
+        "pattern": "endConvo",
+        "template": [
+            "I am glad you talked to me >> You always have me >> Just drop a message anytime!",
+            "Got it. Later then >> Just chat me whenever you are free my friend",
+            "Chat you soon. I had a great time talking to you.",
+            "Thanks for the time, i enjoyed chatting with you.",
+            "Its nice talking to you. Till next time my friend."
+        ],
+        "answers": [
+            {
+                "returnForm": "hyperlink",
+                "pattern": "home.html",
+                "display": "Thank you!"
+            }
+        ]
+    }
+]

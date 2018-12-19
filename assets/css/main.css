@@ -148,7 +148,8 @@ body {
     cursor: pointer;
 }
 
-.play_music_bg{
+.play_music_bg,
+.play_video_bg {
     width: 100vw;
     height: 100vh;
     position: fixed;

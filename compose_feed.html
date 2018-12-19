@@ -18,8 +18,12 @@
     <div class="container pt-3">
         <div class="row bg-theme-info white-text note_auto_dismiss" style="display:none">
             <div class="col s12 p-3">
-                <a onclick="$(this).parent().parent().fadeOut();" class="waves-effect waves-teal btn-flat right"><i class="material-icons">close</i></a>
-               Hi <script>document.write(localStorage.getItem("username"))</script>, just type in something you want to share. Anything, no one will ever judge you about it. Wanna share some stories? Thoughts? Experience? Even your master piece!. We treasure and respect your thoughts here, so no worries ;)
+                <a onclick="$(this).parent().parent().fadeOut();" class="waves-effect waves-teal btn-flat right"><i
+                        class="material-icons">close</i></a>
+                Hi
+                <script>document.write(localStorage.getItem("username"))</script>, just type in something you want to
+                share. Anything, no one will ever judge you about it. Wanna share some stories? Thoughts? Experience?
+                Even your master piece!. We treasure and respect your thoughts here, so no worries ;)
             </div>
         </div>
         <form id="feedForm">
@@ -28,7 +32,8 @@
                 <div class="col s12 m6">
                     <div class="row">
                         <div class="input-field col s12 mb-0">
-                            <textarea id="textarea1" class="materialize-textarea" data-length="1000" maxlength="1000" name="feed_content" required></textarea>
+                            <textarea id="textarea1" class="materialize-textarea textarea-counter" data-length="1000"
+                                maxlength="1000" name="feed_content" required></textarea>
                             <label for="textarea1">Compose your thoughts here..</label>
                         </div>
                         <p class="col s12">

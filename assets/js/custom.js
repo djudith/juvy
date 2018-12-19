@@ -18,7 +18,7 @@ $(document).ready(function () {
     $('.parallax').parallax();
     $("time.timeago").timeago();
     $('.tap-target').tapTarget();
-    $('.materialize-textarea').characterCounter();
+    $('.textarea-counter').characterCounter();
     $('.dropdown-trigger').dropdown();
 
     // click btn

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<script type="text/javascript" src="./assets/js/juvy.templater.js"></script>
+<script>document.write(head)</script>
+
+
+<!-- Body -->
+
+
+
+
+
+
+<div class="container " style="height: 100vh;">
+    <div class=" p-3 text-center ">
+        <img src="./assets/img/juvy.png" class="mt-5 responsive-img w-25 " style="max-width:300px">
+        <h4> Continue as <span class="username"></span></h4>
+        <br>
+        <form id="loginForm">
+            <div class="row">
+                <div class="col m3"></div>
+                <div class="col m6">
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix">lock</i>
+                            <input id="password" autocomplete="off" name="password" type="password" class="validate"
+                                required>
+                            <label for="password">Password</label>
+                        </div>
+                        <div class="col s12">
+                            <button class="btn btnSubmit waves-effect waves-light bg-theme-gradient" type="submit" name="action">Login
+                                <i class="material-icons right">send</i>
+                            </button>
+                            </a>
+                        </div>
+                        <div class="col s12">
+                            <br>
+                            <a class="mt-4 logoutBtn" >Log into Another Account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<!-- Modal Structure -->
+<div id="forgotModal" class="modal ">
+    <form id="forgotForm">
+        <div class="modal-content">
+            <p class="font-weight-bold">Forgot Password</p>
+            <p>If you have forgotten your password, please enter your username below and you will receive an email that
+                includes your new password.</p>
+            <div class="input-field col s12">
+                <input type="text" id="forgot_username" name="username" required autocomplete="off" class="validate">
+                <label for="forgot_username">Username</label>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class=" modal-action modal-close waves-effect waves-red btn-flat">Cancel</a>
+            <button type="submit" class=" waves-effect waves-green btn-flat btnForgotPass">Send</button>
+        </div>
+    </form>
+</div>
+
+
+
+
+<!-- End of Body -->
+
+
+
+
+
+
+
+<script>document.write(foot)</script>
+
+
+
+<script src="./assets/js/app/re_log_in.js"></script>

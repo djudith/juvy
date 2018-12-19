@@ -19,11 +19,11 @@ $(function () {
     // choosing a song
     $("#musicModal").delegate(".play_music_btn", 'click', function () {
         $(".play_music_bg").fadeIn()
-        $("p.play_music_title").text($(this).data("songtitle"))
-        $("span.original_singer").text($(this).data('original_singer'));
-        $("span.uploaded_by").text($(this).data('uploaded_by'));
-        $("span.source").text($(this).data('source'));
-        $("span.type_of_cc").text($(this).data('type_of_cc'));
+        $(".play_music_bg p.play_music_title").text($(this).data("songtitle"))
+        $(".play_music_bg span.original_singer").text($(this).data('original_singer'));
+        $(".play_music_bg span.uploaded_by").text($(this).data('uploaded_by'));
+        $(".play_music_bg span.source").text($(this).data('source'));
+        $(".play_music_bg span.type_of_cc").text($(this).data('type_of_cc'));
     })
 
     // for viewing the credits of song
