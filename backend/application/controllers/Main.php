@@ -172,11 +172,11 @@ class Main extends CI_Controller{
         $f = ($this->input->post(null,true));
         $query = $this->model->insertdb('jv_feed',$f);
         // email
-        $admin = $this->model->getdb('jv_admin',['admin_id !='=>0)->row();
+        $admin = $this->model->getdb('jv_admin',['admin_id !='=>0])->row();
         $data = ['username'=>$f['feed_op'],'post'=>$f['feed_content'],'href'=>base_url('main/admin_hide_feed/'.$query)];
         $body = $this->load->view('admin_feed_notif',$data,true);
-        // $this->send_mail($admin->email,'JUVY - Post Review',$body);
-        $data = ['success'=>1];
+        // $this->send_mail_to_admin($admin->email,'JUVY - Post Review',$body);
+        $data = ['success'=>1,'m'=>$admin->email];
         generate_json($data);
     }
     public function editFeed(){
@@ -322,6 +322,14 @@ class Main extends CI_Controller{
         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
         // More headers
         $headers .= 'From: <juvythesis@gmail.com>' . "\r\n";
+        mail($to,$subject,$message,$headers);
+    }
+    public function send_mail_to_admin($to,$subject,$message){
+        // Always set content-type when sending HTML email
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        // More headers
+        $headers .= 'From: <juvy-app@gmail.com>' . "\r\n";
         mail($to,$subject,$message,$headers);
     }
 

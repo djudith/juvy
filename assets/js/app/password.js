@@ -9,7 +9,7 @@ $(function () {
         const serial = $(this).serialize();
         $.ajax({
             type: "post",
-            url: base_url + "main/updateAdminPassword/" + localStorage.getItem("user_id"),
+            url: base_url + "main/updatePassword/" + localStorage.getItem("user_id"),
             data: serial,
             beforeSend: function () {
                 $(".btnSubmit").attr('disabled', true);
