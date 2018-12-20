@@ -2,6 +2,11 @@
 <script type="text/javascript" src="./assets/js/juvy.templater.js"></script>
 <script>document.write(head)</script>
 
+<style>
+    #unverifiedAccountDiv{
+          display: none!important;
+        }
+      </style>
 
 <!-- Body -->
 
@@ -28,6 +33,16 @@
                 required>
               <label for="username">Username</label>
             </div>
+            <p class="">
+              <label>
+                <input name="gender" value="M" type="radio" checked />
+                <span>Male</span>
+              </label>
+              <label>
+                <input name="gender" value="F" type="radio" />
+                <span>Female</span>
+              </label>
+            </p>
             <div class="input-field col s12">
               <i class="material-icons prefix">email</i>
               <input id="email" maxlength="50" autocomplete="off" type="email" name="email" class="validate" required>
@@ -65,41 +80,4 @@
 
 
 <script>document.write(foot)</script>
-
-<script>
-  $("#signupForm").submit(function (e) {
-    e.preventDefault();
-    const serial = $(this).serialize();
-    $.ajax({
-      type: "post",
-      url: base_url + "main/sign_up",
-      data: serial,
-      beforeSend: function () {
-        $(".btnSubmit").attr('disabled', true);
-      },
-      complete: function () {
-        // $(".btnSubmit").attr('disabled', false);
-      },
-      success: function (data) {
-        if (data.success == 1) {
-          sys_success('Yey! You have successfully registered. Please wait..');
-          localStorage.setItem("userIsLoggedIn", "1");
-          localStorage.setItem("user_id", data.user_id);
-          localStorage.setItem("username", data.info.username);
-          localStorage.setItem("email", data.info.email);
-          sessionStorage.setItem("isLoggedIn", "1");
-          localStorage.setItem('new_member', '1');
-          setTimeout(() => {
-            location.href = "home.html";
-          }, 3000);
-        } else if (data.success == 0) {
-          sys_warning(data.message);
-          $(".btnSubmit").attr('disabled', false);
-        } else {
-          sys_error();
-          $(".btnSubmit").attr('disabled', false);
-        }
-      }
-    });
-  });
-</script>
+<script src="./assets/js/app/sign_up.js"></script>

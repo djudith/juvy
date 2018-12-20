@@ -10,7 +10,7 @@ $(function () {
                 $(".btnSubmit").attr('disabled', true);
             },
             complete: function () {
-                // $(".btnSubmit").attr('disabled', false);
+                $(".btnSubmit").attr('disabled', false);
             },
             success: function (data) {
                 if (data.success == 1) {
@@ -18,6 +18,7 @@ $(function () {
                     localStorage.setItem("user_id", data.user_id);
                     localStorage.setItem("username", data.info.username);
                     localStorage.setItem("email", data.info.email);
+                    localStorage.setItem("enabled", data.info.enabled);
                     sessionStorage.setItem("isLoggedIn", "1");
                     localStorage.setItem("welcome", "1");
                     location.href = "home.html";
@@ -47,7 +48,7 @@ $(function () {
             },
             success: function (data) {
                 if (data.success == 1) {
-                    sys_success('Your new password has been sent to your account\'s email. Please check your email now.')
+                    sys_success('Please check your email now.')
                     $("#forgotModal").modal('close')
                 } else if (data.success == 0) {
                     sys_warning(data.message);

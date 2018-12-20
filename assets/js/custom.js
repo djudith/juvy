@@ -13,6 +13,7 @@ $(document).ready(function () {
             $('.brand-logo').html($(f).data('page'))
         },
     });
+    $('.mz-select').formSelect();
     $('.fixed-action-btn').floatingActionButton();
     $('.sidenav').sidenav();
     $('.parallax').parallax();
@@ -41,7 +42,23 @@ $(document).ready(function () {
         }
     });
 
+
+
+    if (localStorage.getItem("enabled") == 0) {
+        $("body").append(
+            `<div id="unverifiedAccountDiv">
+                <i class="material-icons medium">help</i>
+                <h5>Your account is not yet verified. Please visit your email address and follow the instructions for account verification.</h5>
+                <p>Account already verified? Click <a href="#" class=" blue-text" onclick="refreshVerified()">here</a> to refresh</p>
+                <button class="btn btn-small bg-theme-danger waves-effect" onclick="logout()" style="position:absolute;bottom:30px;right:10px">Logout</button>
+            </div>`
+        );
+    }
+
 });
+
+
+
 $(document).ajaxStart(function () {
     NProgress.start()
 });
@@ -107,4 +124,24 @@ const logout = () => {
     localStorage.removeItem("email");
     sessionStorage.removeItem("isLoggedIn");
     location.href = "index.html";
+}
+function refreshVerified() {
+    $.ajax({
+        url: base_url + "main/getUserInfo/" + localStorage.getItem("user_id"),
+        beforeSend: function () {
+            $(".btnSubmit").attr('disabled', true);
+        },
+        complete: function () {
+            // $(".btnSubmit").attr('disabled', false);
+        },
+        success: function (data) {
+            localStorage.setItem("userIsLoggedIn", "1");
+            localStorage.setItem("user_id", data.user_id);
+            localStorage.setItem("username", data.username);
+            localStorage.setItem("email", data.email);
+            localStorage.setItem("enabled", data.enabled);
+            sessionStorage.setItem("isLoggedIn", "1");
+            location.reload();
+        }
+    });
 }

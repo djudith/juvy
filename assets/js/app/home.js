@@ -14,4 +14,5 @@ $(function () {
         }, 500);
         localStorage.removeItem('new_member')
     }
+
 })

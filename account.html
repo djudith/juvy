@@ -37,6 +37,13 @@
                                 required>
                             <label for="email">Email <span class="red-text">*</span></label>
                         </div>
+                        <div class="input-field col s12">
+                            <select name="gender" id="gender" class="mz-select" required>
+                                <option value="M">Male</option>
+                                <option value="F">Female</option>
+                            </select>
+                            <label>Gender  <span class="red-text">*</span></label>
+                        </div>
                         <div class="input-field col s12 ">
                             <input id="firstname" maxlength="35" autocomplete="off" type="text" name="first_name" class="validate">
                             <label for="firstname">First Name</label>
@@ -78,51 +85,4 @@
 
 <!--End Body -->
 <script>document.write(foot)</script>
-
-
-<script>
-    isLoggedIn();
-    const getInfo = () => {
-        $.ajax({
-            type: "get",
-            url: base_url + "main/getUserInfo/" + localStorage.getItem("user_id"),
-            success: function (data) {
-                $("#email").val(data.email);
-                $("#username").val(data.username);
-                $("#firstname").val(data.first_name);
-                $("#lastname").val(data.last_name);
-                $("#age").val(data.age == "0" ? "" : data.age);
-                M.updateTextFields();
-            }
-        });
-    }
-    $(document).ready(function () {
-        getInfo();
-    });
-    $("#accountForm").submit(function (e) {
-        e.preventDefault();
-
-        const serial = $(this).serialize();
-        $.ajax({
-            type: "post",
-            url: base_url + "main/updateAccount/" + localStorage.getItem("user_id"),
-            data: serial,
-            beforeSend: function () {
-                $(".btnSubmit").attr('disabled', true);
-            },
-            complete: function () {
-                $(".btnSubmit").attr('disabled', false);
-            },
-            success: function (data) {
-                if (data.success == 1) {
-                    getInfo();
-                    sys_success('Yey! Your account has been updated.');
-                } else if (data.success == 0) {
-                    sys_warning(data.message);
-                } else {
-                    sys_error();
-                }
-            }
-        });
-    });
-</script>
+<script src="./assets/js/app/account.js"></script>

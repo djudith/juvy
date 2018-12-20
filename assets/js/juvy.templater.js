@@ -10,7 +10,7 @@ const head = `
         <link type="text/css" rel="stylesheet" href="./assets/css/bs4.helper.css" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="icon" href="./assets/img/icon.png">
-        <title>JUVY v1.0</title>
+        <title>Juvy | AI Companion</title>
     </head>
     <body data-base_url="http://localhost/juvy/backend/">`;
 
@@ -91,6 +91,6 @@ const bottom_nav = `
 <ul class="bottom_tabs  tabs home-tabs grey  lighten-3 ">
     <li class="tab "><a href="#convo" class="active"><i class="material-icons">message</i></a></li>
     <li class="tab "><a href="#feed"><i class="material-icons">rss_feed</i></a></li>
-    <li class="tab "><a href="#secrets"><i class="material-icons">lock</i></a></li>
+    <li class="tab "><a href="#secrets" class="secretTab"><i class="material-icons">lock</i></a></li>
     <li class="tab "><a href="#hopeline"><i class="material-icons">favorite_border</i></a></li>
 </ul>`;

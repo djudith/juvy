@@ -14,6 +14,13 @@ class Main extends CI_Controller{
             } else {
                 $f['password'] = en_dec('en',$f['password']);
                 $query = $this->model->insertdb('jv_users',$f);
+
+                // email
+                $data = ['username'=>$f['username'],'href'=>base_url('main/verify_account_email')];
+                $body = $this->load->view('email_forgot',$data,true);
+                // $this->send_mail($f['email'],'JUVY - Email Verification',$body);
+
+
                 $data = ['success'=>1,'user_id'=>$query,'info'=>$f];
             }
         }
@@ -47,11 +54,10 @@ class Main extends CI_Controller{
             // email
             $data = ['username'=>$f['username'],'password'=>$new_pass,'href'=>'localhost/juvy/log_in.html'];
             $body = $this->load->view('email_forgot',$data,true);
-            $this->send_mail($chkuser->row()->email,'JUVY - Password Reset',$body);
-            // echo $this->email->print_debugger();
+            // $this->send_mail($chkuser->row()->email,'JUVY - Password Reset',$body);
 
 
-            $data = ['success'=>1,'msg'=>$new_pass];
+            $data = ['success'=>1,'msg'=>$new_pass,];
         }
         generate_json($data);
     }
@@ -132,26 +138,101 @@ class Main extends CI_Controller{
         generate_json($data);
     }
     public function getFeedInfo($feed_id){
-        sleep(3);
         $query = $this->model->getdb('jv_feed',['feed_id'=>$feed_id]);
         generate_json($query->row());
+    }
+    public function getSecretPass(){
+        $username = sanitize($this->input->post('username'));
+        $query = $this->model->getdb('jv_users',['username'=>$username]);
+        generate_json($query->row()->secret_pass);
+    }
+    public function registerSecretPass(){
+        $f = sanitize_array($this->input->post(null,true));
+        if($f['secret_pass'] == $f['retype_secret_pass']) {
+            unset($f['retype_secret_pass']);
+            $f['secret_pass'] = en_dec('en',$f['secret_pass']);
+            $this->model->updatedb('jv_users',$f,['user_id'=>$f['user_id']]);
+            $data = ['success'=>1];
+        } else {
+            $data = ['success'=>0,'message'=>'Retype secret pass did not match'];
+        }
+        generate_json($data);
+    }
+    public function secretsLogin(){
+        $f = sanitize_array($this->input->post(null,true));
+        $chkuser = $this->model->getdb('jv_users',['user_id'=>$f['user_id'],'secret_pass'=>en_dec('en',$f['secret_pass'])]);
+        if($chkuser->num_rows()>0){
+            $data = ['success'=>1];
+        } else {
+            $data = ['success'=>0,'message'=>'Incorrect password. Please try again.'];
+        }
+        generate_json($data);
+    }
+    public function getSecretByUsr($user_id){
+        $query = $this->model->getdb('jv_secrets',['enabled !='=>-1,'user_id'=>$user_id],'date_created','DESC');
+        $return = [];
+        foreach($query->result_array() as $data){
+            $tmp = [];
+            $tmp['secret_enc']          = $data['secret'];
+            $tmp['secret_dec']       = en_dec('dec',$data['secret']);
+            $tmp['date_created']    = $data['date_created'];
+            $tmp['enabled']         = $data['enabled'];
+            $tmp['secret_id']       = $data['secret_id'];
+            $return[] = $tmp;
+        }
+        generate_json($return);
+    }
+    public function composesecret(){
+        $f = ($this->input->post(null,true));
+        $f['secret'] = en_dec('en',$f['secret']);
+        $query = $this->model->insertdb('jv_secrets',$f);
+        $data = ['success'=>1];
+        generate_json($data);
+    }
+    public function getSecretInfo($secret_id){
+        $query = $this->model->getdb('jv_secrets',['secret_id'=>$secret_id]);
+        $return = $query->row();
+        $return->secret = en_dec('dec',$return->secret);
+        generate_json($return);
+    }
+    public function editsecret(){
+        $f = ($this->input->post(null,true));
+        $f['secret'] = en_dec('en',$f['secret']);
+        $query = $this->model->updatedb('jv_secrets',$f,['secret_id'=>$f['secret_id']]);
+        $data = ['success'=>1];
+        generate_json($data);
+    }
+    public function deletesecrets(){
+        $f = sanitize_array($this->input->post(null,true));
+        $query = $this->model->updatedb('jv_secrets',['enabled'=>"-1"],['secret_id'=>$f['secret_id']]);
+        $data = ['success'=>1];
+        generate_json($data);
     }
 
 
 
 
-    public function send_mail($receiver,$subject,$body){
+    public function send_mailx($receiver,$subject,$body){
         // this code is for sending email
         $this->load->library('email');
 
         $result = $this->email
-        ->from('dummywaeil@gmail.com')
+        ->from('juvythesis@gmail.com')
         ->reply_to('')    // Optional, an account where a human being reads.
         ->to($receiver)
         ->subject($subject)
         ->message($body)
         ->send();
         //end of sending email
+    }
+
+    public function send_mail($to,$subject,$message){
+        // Always set content-type when sending HTML email
+        $headers = "MIME-Version: 1.0" . "\r\n";
+        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+        // More headers
+        $headers .= 'From: <juvythesis@gmail.com>' . "\r\n";
+        mail($to,$subject,$message,$headers);
     }
 
 }

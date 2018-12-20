@@ -2,6 +2,11 @@
 <script type="text/javascript" src="./assets/js/juvy.templater.js"></script>
 <script>document.write(head)</script>
 
+<style>
+    #unverifiedAccountDiv{
+          display: none!important;
+        }
+      </style>
 
 <!-- Body -->
 
@@ -57,7 +62,7 @@
 
 
 <!-- Modal Structure -->
-<div id="forgotModal" class="modal ">
+<div id="forgotModal" class="modal modal-notdismissible ">
     <form id="forgotForm">
         <div class="modal-content">
             <p class="font-weight-bold">Forgot Password</p>

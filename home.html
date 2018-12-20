@@ -94,9 +94,38 @@
 
 <!-- SECRETS -->
 <div id="secrets" class="current_page" data-page="Secrets">
-    <div class="container">
-        <div class="progress blue lighten-4">
-            <div class="indeterminate purple darken-1"></div>
+    <div class="container pb-5 ">
+        <div class=" center p-4">
+            <i class="material-icons medium">lock</i>
+            <p>This is your secret vault. You can shitness here anytime. Share your shitness and your shiteness will be
+                kept secretshit haha.</p>
+            <div id="unregisteredSecretPass" style="display:none">
+                <h5>To Secure your shitness, please register a secret password first.</h5>
+                <form id="registerSecretForm">
+                    <div class="input-field col s12 l6">
+                        <input type="password" name="secret_pass" id="secret_pass" class="validate" autocomplete="off"
+                            required>
+                        <label for="secret_pass">Secret Pass</label>
+                    </div>
+                    <div class="input-field col s12 l6">
+                        <input type="password" autocomplete="off" name="retype_secret_pass" id="retype_secret_pass"
+                            class="validate">
+                        <label for="retype_secret_pass">Re-type Secret Pass</label>
+                    </div>
+                    <button type="submit" class="waves-effect waves-light btn bg-theme-gradient">Register <i class="material-icons right">check</i></button>
+                </form>
+            </div>
+            <div id="registeredSecretPass" style="display:none">
+                <h5>Please enter your secret pass shit to view all your saved secrets</h5>
+                <form id="secretPassForm">
+                    <div class="input-field col s12 l6">
+                        <input type="password" name="secret_pass" id="secret_pass1" class="validate" autocomplete="off"
+                            required>
+                        <label for="secret_pass1">Secret Pass</label>
+                    </div>
+                    <button type="submit" class="waves-effect waves-light btn bg-theme-gradient">Access</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
@@ -188,3 +217,4 @@
 
 <script src="./assets/js/app/home.js"></script>
 <script src="./assets/js/app/feed.js"></script>
+<script src="./assets/js/app/home_secrets.js"></script>
