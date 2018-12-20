@@ -49,7 +49,7 @@ $(document).ready(function () {
             `<div id="unverifiedAccountDiv">
                 <i class="material-icons medium">help</i>
                 <h5>Your account is not yet verified. Please visit your email address and follow the instructions for account verification.</h5>
-                <p>Account already verified? Click <a href="#" class=" blue-text" onclick="refreshVerified()">here</a> to refresh</p>
+                <p>Account already verified? Click <a href="#" class=" blue-text" onclick="refreshVerified();location.reload();">here</a> to refresh</p>
                 <button class="btn btn-small bg-theme-danger waves-effect" onclick="logout()" style="position:absolute;bottom:30px;right:10px">Logout</button>
             </div>`
         );
@@ -146,8 +146,8 @@ function refreshVerified() {
             localStorage.setItem("username", data.username);
             localStorage.setItem("email", data.email);
             localStorage.setItem("enabled", data.enabled);
+            localStorage.setItem("gender", data.gender);
             sessionStorage.setItem("isLoggedIn", "1");
-            location.reload();
         }
     });
 }

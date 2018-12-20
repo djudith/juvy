@@ -42,6 +42,7 @@ $(function () {
             success: function (data) {
                 if (data.success == 1) {
                     getInfo();
+                    refreshVerified();
                     sys_success('Yey! Your account has been updated.');
                 } else if (data.success == 0) {
                     sys_warning(data.message);

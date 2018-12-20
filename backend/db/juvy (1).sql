@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2018 at 07:52 AM
+-- Generation Time: Dec 20, 2018 at 10:22 PM
 -- Server version: 10.1.36-MariaDB
 -- PHP Version: 7.0.32
 
@@ -25,6 +25,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `jv_admin`
+--
+
+CREATE TABLE `jv_admin` (
+  `admin_id` int(11) NOT NULL,
+  `admin_type` varchar(1) NOT NULL DEFAULT 'F',
+  `username` varchar(50) NOT NULL,
+  `email` varchar(50) NOT NULL,
+  `password` text NOT NULL,
+  `enabled` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `jv_admin`
+--
+
+INSERT INTO `jv_admin` (`admin_id`, `admin_type`, `username`, `email`, `password`, `enabled`) VALUES
+(1, 'F', 'juvy_admin', 'juvythesis@gmail.com', 'QkpKUldMeCtuVjhvd0llcTIwUGYzUT09', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jv_feed`
 --
 
@@ -34,7 +56,7 @@ CREATE TABLE `jv_feed` (
   `feed_op` varchar(20) NOT NULL,
   `feed_content` text NOT NULL,
   `feed_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `enabled` int(11) NOT NULL DEFAULT '1'
+  `enabled` int(11) NOT NULL DEFAULT '1' COMMENT '-2=admin disapproved, -1=archived, 0=private, 1=public'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -77,6 +99,7 @@ CREATE TABLE `jv_users` (
   `password` varchar(100) NOT NULL,
   `pin_code` text NOT NULL,
   `secret_pass` text NOT NULL,
+  `juvy_avatar` varchar(50) NOT NULL,
   `date_created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `enabled` int(11) NOT NULL DEFAULT '0' COMMENT '-1=deactivate; 0=unverified; 1=verified'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -85,12 +108,18 @@ CREATE TABLE `jv_users` (
 -- Dumping data for table `jv_users`
 --
 
-INSERT INTO `jv_users` (`user_id`, `username`, `email`, `first_name`, `last_name`, `age`, `gender`, `password`, `pin_code`, `secret_pass`, `date_created`, `enabled`) VALUES
-(5, 'roronoaeil', 'waeilmugiwara@gmail.com', 'Waeil', 'Tingao', 18, 'M', 'QkpKUldMeCtuVjhvd0llcTIwUGYzUT09', '', 'QkpKUldMeCtuVjhvd0llcTIwUGYzUT09', '2018-11-29 23:49:44', 1);
+INSERT INTO `jv_users` (`user_id`, `username`, `email`, `first_name`, `last_name`, `age`, `gender`, `password`, `pin_code`, `secret_pass`, `juvy_avatar`, `date_created`, `enabled`) VALUES
+(5, 'roronoaeil', 'waeilmugiwara@gmail.com', 'Waeil', 'Tingao', 18, 'F', 'QkpKUldMeCtuVjhvd0llcTIwUGYzUT09', '', 'QkpKUldMeCtuVjhvd0llcTIwUGYzUT09', '', '2018-11-29 23:49:44', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `jv_admin`
+--
+ALTER TABLE `jv_admin`
+  ADD PRIMARY KEY (`admin_id`);
 
 --
 -- Indexes for table `jv_feed`
@@ -115,22 +144,28 @@ ALTER TABLE `jv_users`
 --
 
 --
+-- AUTO_INCREMENT for table `jv_admin`
+--
+ALTER TABLE `jv_admin`
+  MODIFY `admin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `jv_feed`
 --
 ALTER TABLE `jv_feed`
-  MODIFY `feed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `feed_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `jv_secrets`
 --
 ALTER TABLE `jv_secrets`
-  MODIFY `secret_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `secret_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jv_users`
 --
 ALTER TABLE `jv_users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

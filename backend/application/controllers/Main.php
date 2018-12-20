@@ -172,9 +172,10 @@ class Main extends CI_Controller{
         $f = ($this->input->post(null,true));
         $query = $this->model->insertdb('jv_feed',$f);
         // email
+        $admin = $this->model->getdb('jv_admin',['admin_id !='=>0)->row();
         $data = ['username'=>$f['feed_op'],'post'=>$f['feed_content'],'href'=>base_url('main/admin_hide_feed/'.$query)];
         $body = $this->load->view('admin_feed_notif',$data,true);
-        // $this->send_mail($f['email'],'JUVY - Email Verification',$body);
+        // $this->send_mail($admin->email,'JUVY - Post Review',$body);
         $data = ['success'=>1];
         generate_json($data);
     }
@@ -224,7 +225,7 @@ class Main extends CI_Controller{
     }
     public function admin_hide_feed($feed_id){
         $query = $this->model->updatedb('jv_feed',['enabled'=>-2],['feed_id'=>$feed_id]);
-        echo "<br><br><br><center><h1>The post has been hidden.<br> Just log into your account to review and unhide it again. <br> Thank you!</h1></center>"
+        echo "<br><br><br><center><h1>The post has been hidden.<br> Just log into your account to review and unhide it again. <br> Thank you!</h1></center>";
     }
     public function getFeedInfo($feed_id){
         $query = $this->model->getdb('jv_feed',['feed_id'=>$feed_id]);
