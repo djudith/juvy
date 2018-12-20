@@ -2,10 +2,10 @@
     {
         "pattern": "startConversation",
         "template": [
-            "Uy! Musta? >> May kwento ka bang gusto i-share? Tara usap tayo.>> O gusto mo makinig ng mga music? >> Or baka gusto mo manood ng inspirational videos?"
+            "Uy %cs%! Long time no chat haha. >> May kwento ka bang gusto i-share? Tara usap tayo.>> O gusto mo makinig ng mga music? >> Or baka gusto mo manood ng inspirational videos?"
         ],
         "return": "txtbox"
-    },
+    }, 
     {
         "pattern": "askUser",
         "template": [
@@ -16,21 +16,21 @@
     {
         "pattern": "doneSharing",
         "template": [
-            "So, may kwento ka pa bang gusto i-share o pag usapan?? >> Gusto mo pa makinig ng mga music? >> Or baka gusto mo pa manood ng inspirational videos?"
+            "So, may kwento ka pa bang gusto i-share o pag usapan %cs%?? >> Gusto mo pa makinig ng mga music? >> Or baka gusto mo pa manood ng inspirational videos?"
         ],
         "return": "txtbox"
     },
     {
         "pattern": "usap,share,talk,kwento,kuwento",
         "template": [
-            "Ah sige, anong gusto mo pag usapan? >> puwede mo yan ishare saken"
+            "Ah sige, anong gusto mo pag usapan %cs%? >> puwede mo yan ishare saken"
         ],
         "return": "txtbox"
     },
     {
         "pattern": "somethingShared",
         "template": [
-            "Happy ako na naishare mo yan sakin. >> Minsan talaga magandang may nakakausap ka. >> kase keme keme keme"
+            "Happy ako na naishare mo yan sakin %cs%. >> Minsan talaga magandang may nakakausap ka. >> kase keme keme keme"
         ],
         "return": "button",
         "answers": [
@@ -44,7 +44,7 @@
     {
         "pattern": "music,tugtog,kinig,kanta",
         "template": [
-            "Marami akong music dito >> pili ka lang >> makakahelp to sa mood mo"
+            "Marami akong music dito %cs%>> pili ka lang >> makakahelp to sa mood mo"
         ],
         "return": "button",
         "answers": [
@@ -58,7 +58,7 @@
     {
         "pattern": "video,nuod",
         "template": [
-            "Marami akong videos dito para sayo>> sabi nila nakakahelp daw to boost mood. >> pili ka "
+            "Marami akong videos dito %cs%>> sabi nila nakakahelp daw to boost mood. >> pili ka "
         ],
         "return": "button",
         "answers": [

@@ -19,6 +19,9 @@ $(function () {
                     localStorage.setItem("user_id", data.user_id);
                     localStorage.setItem("username", data.info.username);
                     localStorage.setItem("email", data.info.email);
+                    localStorage.setItem("gender", data.info.gender);
+                    localStorage.setItem("enabled", data.info.enabled);
+
                     sessionStorage.setItem("isLoggedIn", "1");
                     localStorage.setItem("welcome", "1");
                     location.href = "home.html";

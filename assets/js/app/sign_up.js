@@ -20,6 +20,7 @@ $(function () {
                     localStorage.setItem("username", data.info.username);
                     localStorage.setItem("email", data.info.email);
                     localStorage.setItem("enabled", 0);
+                    localStorage.setItem("gender", data.info.gender);
                     sessionStorage.setItem("isLoggedIn", "1");
                     localStorage.setItem('new_member', '1');
                     setTimeout(() => {

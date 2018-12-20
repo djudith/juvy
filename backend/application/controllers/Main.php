@@ -33,14 +33,23 @@ class Main extends CI_Controller{
 
     public function login(){
         $f = sanitize_array($this->input->post(null,true));
-        $chkuser = $this->model->getdb('jv_users',['username'=>$f['username']]);
-        if($chkuser->num_rows()<=0){
-            $data = ['success'=>0,'message'=>'Username does not exist. <br> <a href="sign_up.html"><u>Sign up here.</u></a>'];
-        } else {
-            if($chkuser->row()->password == en_dec('en',$f['password'])){
-                $data = ['success'=>1,'user_id'=>$chkuser->row()->user_id,'info'=>$chkuser->row()];
+        $chkadmin = $this->model->getdb('jv_admin',['username'=>$f['username']]);
+        if($chkadmin->num_rows()>0){
+            if($chkadmin->row()->password == en_dec('en',$f['password'])){
+                $data = ['success'=>1,'user_id'=>$chkadmin->row()->admin_id,'info'=>$chkadmin->row(),'user_type'=>'1'];
             } else {
                 $data = ['success'=>0,'message'=>'Incorrect password. Please try again.'];
+            }
+        } else {
+            $chkuser = $this->model->getdb('jv_users',['username'=>$f['username']]);
+            if($chkuser->num_rows()<=0){
+                $data = ['success'=>0,'message'=>'Username does not exist. <br> <a href="sign_up.html"><u>Sign up here.</u></a>'];
+            } else {
+                if($chkuser->row()->password == en_dec('en',$f['password'])){
+                    $data = ['success'=>1,'user_id'=>$chkuser->row()->user_id,'info'=>$chkuser->row(),'user_type'=>2];
+                } else {
+                    $data = ['success'=>0,'message'=>'Incorrect password. Please try again.'];
+                }
             }
         }
         generate_json($data);
@@ -71,6 +80,11 @@ class Main extends CI_Controller{
         generate_json($info->row());
     }
 
+    public function getAdminInfo($admin_id){
+        $info = $this->model->getdb('jv_admin',['admin_id'=>$admin_id]);
+        generate_json($info->row());
+    }
+
     public function updateAccount($user_id){
         $f = sanitize_array($this->input->post(null,true));
         $sql = "SELECT * FROM jv_users WHERE user_id != ? AND username = ?";
@@ -85,6 +99,38 @@ class Main extends CI_Controller{
             } else {
                 $this->model->updatedb('jv_users',$f,['user_id'=>$user_id]);
                 $data = ['success'=>1];
+            }
+        }
+        generate_json($data);
+    }
+
+    public function updateAdminAccount($admin_id){
+        $f = sanitize_array($this->input->post(null,true));
+        $sql = "SELECT * FROM jv_admin WHERE admin_id != ? AND username = ?";
+        $info = $this->model->querydb($sql,[$admin_id,$f['username']]);
+        if($info->num_rows() > 0){
+            $data = ['success'=>0,'message'=>'Username already exist'];
+        } else {
+
+            $sql = "SELECT * FROM jv_admin WHERE admin_id != ? AND email = ?";
+            $info = $this->model->querydb($sql,[$admin_id,$f['email']]);
+            if($info->num_rows() > 0){
+                $data = ['success'=>0,'message'=>'Email already exist'];
+            } else {
+                $sql = "SELECT * FROM jv_users WHERE username = ?";
+                $info = $this->model->querydb($sql,[$f['username']]);
+                if($info->num_rows() > 0){
+                    $data = ['success'=>0,'message'=>'Username already exist.'];
+                } else {
+                    $sql = "SELECT * FROM jv_users WHERE email = ?";
+                    $info = $this->model->querydb($sql,[$f['email']]);
+                    if($info->num_rows() > 0){
+                        $data = ['success'=>0,'message'=>'Email already exist.'];
+                    } else {
+                        $this->model->updatedb('jv_admin',$f,['admin_id'=>$admin_id]);
+                        $data = ['success'=>1];
+                    }
+                }
             }
         }
         generate_json($data);
@@ -105,9 +151,30 @@ class Main extends CI_Controller{
         }
         generate_json($data);
     }
+
+    public function updateAdminPassword($admin_id){
+        $f = sanitize_array($this->input->post(null,true));
+        $info = $this->model->getdb('jv_admin',['admin_id'=>$admin_id])->row();
+        if($info->password == en_dec('en',$f['old_password'])){
+            if($f['new_password']==$f['password']){
+                $this->model->updatedb('jv_admin',['password'=>en_dec('en',$f['password'])],['admin_id'=>$admin_id]);
+                $data = ['success'=>1];
+            } else {
+                $data = ['success'=>0,'message'=>'Re-type New password did not match with New password'];
+            }
+        } else {
+            $data = ['success'=>0,'message'=>'Old password is not correct'];
+        }
+        generate_json($data);
+    }
+
     public function composeFeed(){
         $f = ($this->input->post(null,true));
         $query = $this->model->insertdb('jv_feed',$f);
+        // email
+        $data = ['username'=>$f['feed_op'],'post'=>$f['feed_content'],'href'=>base_url('main/admin_hide_feed/'.$query)];
+        $body = $this->load->view('admin_feed_notif',$data,true);
+        // $this->send_mail($f['email'],'JUVY - Email Verification',$body);
         $data = ['success'=>1];
         generate_json($data);
     }
@@ -121,8 +188,12 @@ class Main extends CI_Controller{
         $query = $this->model->getdb('jv_feed',['enabled'=>1],'feed_date','DESC');
         generate_json($query->result());
     }
+    public function getAdminFeed(){
+        $query = $this->model->getdb('jv_feed',['enabled !='=>0,'enabled !='=>-1],'feed_date','DESC');
+        generate_json($query->result());
+    }
     public function getFeedByUsr($user_id){
-        $query = $this->model->getdb('jv_feed',['enabled !='=>-1,'user_id'=>$user_id],'feed_date','DESC');
+        $query = $this->model->getdb('jv_feed',['enabled !='=>-1,'enabled !='=>-2,'user_id'=>$user_id],'feed_date','DESC');
         generate_json($query->result());
     }
     public function deleteFeed(){
@@ -140,6 +211,20 @@ class Main extends CI_Controller{
         $query = $this->model->updatedb('jv_feed',['enabled'=>$enabled],['feed_id'=>$f['feed_id']]);
         $data = ['success'=>1];
         generate_json($data);
+    }
+    public function admin_toggle_feed_privacy(){
+        $f = sanitize_array($this->input->post(null,true));
+        $enabled = 1;
+        if($f['enabled']==1){
+            $enabled = -2;
+        }
+        $query = $this->model->updatedb('jv_feed',['enabled'=>$enabled],['feed_id'=>$f['feed_id']]);
+        $data = ['success'=>1];
+        generate_json($data);
+    }
+    public function admin_hide_feed($feed_id){
+        $query = $this->model->updatedb('jv_feed',['enabled'=>-2],['feed_id'=>$feed_id]);
+        echo "<br><br><br><center><h1>The post has been hidden.<br> Just log into your account to review and unhide it again. <br> Thank you!</h1></center>"
     }
     public function getFeedInfo($feed_id){
         $query = $this->model->getdb('jv_feed',['feed_id'=>$feed_id]);

@@ -7,37 +7,36 @@
     </div>
     <i class="material-icons text-white refreshBtn cursor-pointer" style="position:fixed;bottom:15px;right:15px">refresh</i>
 </div>
-<script>document.write(backnav)</script>
+<script>document.write(topnav)</script>
 <script>document.write(sidenav)</script>
 
 <!-- Body -->
 
 
 
-<div id="convo" class="current_page" data-page="Password" data-back="account.html">
-    <div class="container pt-5">
+<div id="convo" class="current_page" data-page="Admin Account">
+    <div class="container pt-3">
+        <a href="password.html" class="float-right text-muted">Edit Password <i class="material-icons tiny">lock</i>
+        </a>
+        <br>
         <div class="text-center">
-            <i class="material-icons medium">lock</i>
+            <i class="material-icons medium">account_circle</i>
         </div>
         <form id="accountForm">
             <div class="row">
                 <div class="col s12 m3"></div>
                 <div class="col s12 m6">
-                    <div class="input-field">
-                        <input id="old_password" autocomplete="off" type="password" name="old_password" class="validate"
-                            maxlength="15" required>
-                        <label for="old_password" class="active">Old password <span class="red-text">*</span> </label>
-                    </div>
-                    <div class="input-field">
-                        <input id="new_password" autocomplete="off" type="password" name="new_password" class="validate"
-                            maxlength="15" required>
-                        <label for="new_password" class="active">New password <span class="red-text">*</span> </label>
-                    </div>
-                    <div class="input-field">
-                        <input id="password" autocomplete="off" type="password" name="password" class="validate"
-                            maxlength="15" required>
-                        <label for="password" class="active">Re-type New password <span class="red-text">*</span>
-                        </label>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="username" autocomplete="off" type="text" name="username" class="validate"
+                                maxlength="15" required>
+                            <label for="username" class="active">Username <span class="red-text">*</span> </label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input id="email" autocomplete="off" type="email" name="email" class="validate"
+                                maxlength="50" required>
+                            <label for="email" class="active">Email <span class="red-text">*</span> </label>
+                        </div>
                     </div>
                     <div class="text-center">
                         <button class="btn waves-effect waves-light bg-theme-gradient btnSubmit" type="submit" name="action">Save
@@ -67,5 +66,4 @@
 
 <!--End Body -->
 <script>document.write(foot)</script>
-
-<script src="./assets/js/app/password.js"></script>
+<script src="./assets/js/app/admin_account.js"></script>

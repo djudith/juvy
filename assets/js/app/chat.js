@@ -26,19 +26,22 @@ $(function () {
         "return": "txtbox"
     };
 
+    // call sign if male of female
+    const cs_fm = {
+        M: ['pre', 'par', 'man', 'tol'],
+        F: ['sis', 'bii', 'be', 'mars'],
+    };
+    let cs;
+
     // dito save ung pinaka last na sinabe ni juvy
     var latest_juvy_response;
 
+    // flag ng sharing , kpag gusto mag share ni user magiging true to
     var isSharing, sharing = false;
-    var juvy_bubble_delay = Math.floor(Math.random() * (1500 - 500 + 1)) + 1000;
 
-
-    // pagka load ng pag eto na ung gagawin
-    $(document).ready(function () {
-        let data = search_matching(aiml, 'startConversation');
-        let say = data['template'][Math.floor((Math.random() * data['template'].length))];
-        juvy_say(say, data, data['return']);
-    });
+    // eto ung speed ng pag tatype ni juvy
+    var juvy_bubble_delay = 1;
+    // var juvy_bubble_delay = Math.floor(Math.random() * (1500 - 500 + 1)) + 1000;
 
 
     // search in json (deprecated)
@@ -72,6 +75,139 @@ $(function () {
         // console.log(fallback_response);
         return latest_juvy_response;
     }
+
+    // detect what gender then set callsign
+    function get_cs_callsign() {
+        var gender = localStorage.getItem("gender")
+        cs = cs_fm[gender][Math.floor((Math.random() * cs_fm[gender].length))];
+    }
+
+    // start conversation
+    function startConversation() {
+        let data = search_matching(aiml, 'startConversation');
+        let say = data['template'][Math.floor((Math.random() * data['template'].length))];
+        juvy_say(say, data, data['return']);
+    }
+
+    // kpag nag reply si user
+    function user_say(pattern, display) {
+        const html = `<div class="baloon1">${display}</div>`
+        $(".chat-container").append(html)
+        $(".user_textarea").fadeOut('fast');
+        $("html, body").animate({ scrollTop: $(document).height() }, 500); // force the page to scroll down
+
+        $("#answerModal").modal('close');
+
+        if (isSharing) {
+            let data = search_matching(aiml, 'somethingShared');
+            let say = data['template'][Math.floor((Math.random() * data['template'].length))];
+            juvy_say(say, data, pattern);
+            isSharing = false;
+        } else {
+            let data = search_matching(aiml, pattern);
+            let say = data['template'][Math.floor((Math.random() * data['template'].length))];
+            juvy_say(say, data, pattern);
+        }
+    }
+
+
+    // eto reply ni juvy
+    function juvy_say(words, data, pattern) {
+        latest_juvy_response = data;
+        var arrwords = words.split(">>"); // make an array out of the string, separator is >>
+        var i = 0, nth = arrwords.length; // used for looping with delay
+
+        function add_chat_bubble() { // function for adding typing animation, then message
+            $(".chat-container").append(`<div class="baloon2 typing_bubble"><img src="./assets/img/typing.gif" width="30"></div>`)
+            setTimeout(() => {
+                $(".typing_bubble").remove();
+                $(".chat-container").append(`<div class="baloon2">${arrwords[i].replace("%cs%", cs)}</div>`)
+                $("html, body").animate({ scrollTop: $(document).height() }, 500); // force the page to scroll down.
+
+                i++;
+
+                if (i < nth) {  // if not yet done typing si juvy, still add bubbles
+
+                    add_chat_bubble()
+
+                } else { // if everything has been said by juvy, now display the choices to user 
+
+                    if (data.return == "txtbox") {
+                        $(".user_textarea").fadeIn('fast', function () {
+                            setTimeout(() => {
+                                $("#reply_txtbox").focus();
+                            }, 10);
+                        });
+                    } else {
+                        display_answers()
+                    }
+
+
+                }
+            }, juvy_bubble_delay);
+        }
+        var display_answers = function () { //  function for displaying choices after juvy say something.
+            let answers = data.answers;
+            let answers_html = '';
+            let audioPlayFlag = false;
+            for (var i = 0; i < answers.length; i++) {
+                if (answers[i].returnForm == "music_modal") {
+                    answers_html += `<a href="#musicModal" class=" modal-trigger chat_user_btn waves-effect waves-theme-gradient">
+                                        ${answers[i].display}
+                                    </a>`;
+                }
+                if (answers[i].returnForm == "video_modal") {
+                    answers_html += `<a href="#videoModal" class=" modal-trigger chat_user_btn waves-effect waves-theme-gradient">
+                                        ${answers[i].display}
+                                    </a>`;
+                }
+                if (answers[i].returnForm == "button") {
+                    // answers_html += `<div class=" d-inline-block"><a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_say_btn waves-effect waves-theme-gradient">
+                    //                     ${answers[i].display}
+                    //                 </a></div>`;
+                    answers_html += `<div class="answerCon"><a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_say_btn waves-effect waves-theme-gradient">
+                                        ${answers[i].display}
+                                    </a></div>`;
+                }
+                if (answers[i].returnForm == "hyperlink") {
+                    answers_html += `<a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_say_a waves-effect waves-theme-gradient">
+                                        ${answers[i].display}
+                                    </a>`;
+                }
+                if (answers[i].returnForm == "audio") {
+                    $("#answerContainerOption").hide();
+                    answers_html += answers[i].display;
+                    audioPlayFlag = true
+                }
+            }
+            $("#answerContainerOption").html(answers_html);
+            if (audioPlayFlag) {
+                setTimeout(() => {
+                    var x = document.getElementById(pattern);
+                    x.play();
+                }, 500);
+                setTimeout(() => {
+                    $("#answerContainerOption").show();
+                    $("html, body").animate({ scrollTop: $(document).height() }, 500);
+                }, 3000);
+            }
+            $("html, body").animate({ scrollTop: $(document).height() }, 500); // force page to scroll down
+        }
+        add_chat_bubble(); // call the function for adding chat bubble
+    }
+
+
+
+
+
+
+    // ------------- DOM EVENTS
+
+    // pagka load ng pag eto na ung gagawin
+    $(document).ready(function () {
+        startConversation();
+        get_cs_callsign();
+    });
 
     // click event ng mga choose buttons sa choices
     $("#musicModal, #answerModal, #answerContainerOption").delegate(".user_say_btn", "click", function () {
@@ -136,117 +272,6 @@ $(function () {
         $("#reply_txtbox").detach().prependTo('.user_textarea > .d-flex ')
         $('#sharingTipsModal').modal('close');
     });
-
-
-    // kpag nag reply si user
-    function user_say(pattern, display) {
-        const html = `<div class="baloon1">${display}</div>`
-        $(".chat-container").append(html)
-        $(".user_textarea").fadeOut('fast');
-        $("html, body").animate({ scrollTop: $(document).height() }, 500); // force the page to scroll down
-
-        $("#answerModal").modal('close');
-
-        if (isSharing) {
-            let data = search_matching(aiml, 'somethingShared');
-            let say = data['template'][Math.floor((Math.random() * data['template'].length))];
-            juvy_say(say, data, pattern);
-            isSharing = false;
-        } else {
-            let data = search_matching(aiml, pattern);
-            let say = data['template'][Math.floor((Math.random() * data['template'].length))];
-            juvy_say(say, data, pattern);
-        }
-    }
-
-
-    // eto reply ni juvy
-    function juvy_say(words, data, pattern) {
-        latest_juvy_response = data;
-        var arrwords = words.split(">>"); // make an array out of the string, separator is >>
-        var i = 0, nth = arrwords.length; // used for looping with delay
-
-        function add_chat_bubble() { // function for adding typing animation, then message
-            $(".chat-container").append(`<div class="baloon2 typing_bubble"><img src="./assets/img/typing.gif" width="30"></div>`)
-            setTimeout(() => {
-                $(".typing_bubble").remove();
-                $(".chat-container").append(`<div class="baloon2">${arrwords[i]}</div>`)
-                $("html, body").animate({ scrollTop: $(document).height() }, 500); // force the page to scroll down.
-
-                i++;
-
-                if (i < nth) {  // if not yet done typing si juvy, still add bubbles
-
-                    add_chat_bubble()
-
-                } else { // if everything has been said by juvy, now display the choices to user 
-
-                    if (data.return == "txtbox") {
-                        $(".user_textarea").fadeIn('fast', function () {
-                            setTimeout(() => {
-                                $("#reply_txtbox").focus();
-                            }, 10);
-                        });
-                    } else {
-                        display_answers()
-                    }
-
-
-                }
-            }, 1);
-            // }, juvy_bubble_delay);
-        }
-        var display_answers = function () { //  function for displaying choices after juvy say something.
-            let answers = data.answers;
-            let answers_html = '';
-            let audioPlayFlag = false;
-            for (var i = 0; i < answers.length; i++) {
-                if (answers[i].returnForm == "music_modal") {
-                    answers_html += `<a href="#musicModal" class=" modal-trigger chat_user_btn waves-effect waves-theme-gradient">
-                                        ${answers[i].display}
-                                    </a>`;
-                }
-                if (answers[i].returnForm == "video_modal") {
-                    answers_html += `<a href="#videoModal" class=" modal-trigger chat_user_btn waves-effect waves-theme-gradient">
-                                        ${answers[i].display}
-                                    </a>`;
-                }
-                if (answers[i].returnForm == "button") {
-                    // answers_html += `<div class=" d-inline-block"><a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_say_btn waves-effect waves-theme-gradient">
-                    //                     ${answers[i].display}
-                    //                 </a></div>`;
-                    answers_html += `<div class="answerCon"><a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_say_btn waves-effect waves-theme-gradient">
-                                        ${answers[i].display}
-                                    </a></div>`;
-                }
-                if (answers[i].returnForm == "hyperlink") {
-                    answers_html += `<a data-pattern="${answers[i].pattern}" data-display="${answers[i].display}" class="chat_user_btn user_say_a waves-effect waves-theme-gradient">
-                                        ${answers[i].display}
-                                    </a>`;
-                }
-                if (answers[i].returnForm == "audio") {
-                    $("#answerContainerOption").hide();
-                    answers_html += answers[i].display;
-                    audioPlayFlag = true
-                }
-            }
-            $("#answerContainerOption").html(answers_html);
-            if (audioPlayFlag) {
-                setTimeout(() => {
-                    var x = document.getElementById(pattern);
-                    x.play();
-                }, 500);
-                setTimeout(() => {
-                    $("#answerContainerOption").show();
-                    $("html, body").animate({ scrollTop: $(document).height() }, 500);
-                }, 3000);
-            }
-            $("html, body").animate({ scrollTop: $(document).height() }, 500); // force page to scroll down
-        }
-        add_chat_bubble(); // call the function for adding chat bubble
-    }
-
-
 
 
 })

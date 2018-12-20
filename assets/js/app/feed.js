@@ -11,6 +11,7 @@ $(function () {
             type: "get",
             url: base_url + "main/getFeedInfo/" + feed_id,
             success: function (data) {
+                $("#viewPostModal").modal('open')
                 $("#viewPostModal > .modal-content").html(data.feed_content)
                 $(".btnclosemodalpost").attr('disabled', false).removeClass('disabled')
             }
@@ -35,7 +36,7 @@ $(function () {
                     $(".feed_container").html('');
                 }
                 for (var i = 0; i < data.length; i++) {
-                    var html = `<a href="#viewPostModal" data-feed_id="${data[i].feed_id}" class="modal-trigger btnViewPost"> 
+                    var html = `<a data-feed_id="${data[i].feed_id}" class="btnViewPost"> 
                                     <div class="card">
                                         <div class="card-content">
                                             <p class="truncate">${data[i].feed_content}</p>

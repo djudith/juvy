@@ -1,5 +1,9 @@
 $(function () {
-    isLoggedIn();
+    if (localStorage.getItem("user_type") == 1) {
+        location.href = "admin.html"
+    } else {
+        isLoggedIn();
+    }
     // localStorage.setItem('welcome', 1)
     if (localStorage.getItem('welcome') == 1) {
         setTimeout(() => {
@@ -14,5 +18,6 @@ $(function () {
         }, 500);
         localStorage.removeItem('new_member')
     }
+
 
 })

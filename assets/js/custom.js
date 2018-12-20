@@ -54,6 +54,10 @@ $(document).ready(function () {
             </div>`
         );
     }
+    if (localStorage.getItem("user_type") == 1) {
+        $(".sidenav").find("a[href='my_thoughts.html']").parent().remove();
+
+    }
 
 });
 
@@ -122,6 +126,8 @@ const logout = () => {
     localStorage.removeItem("user_id");
     localStorage.removeItem("username");
     localStorage.removeItem("email");
+    localStorage.removeItem("gender");
+    localStorage.removeItem("enabled");
     sessionStorage.removeItem("isLoggedIn");
     location.href = "index.html";
 }

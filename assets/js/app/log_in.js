@@ -14,14 +14,22 @@ $(function () {
             },
             success: function (data) {
                 if (data.success == 1) {
+
                     localStorage.setItem("userIsLoggedIn", "1");
-                    localStorage.setItem("user_id", data.user_id);
-                    localStorage.setItem("username", data.info.username);
-                    localStorage.setItem("email", data.info.email);
-                    localStorage.setItem("enabled", data.info.enabled);
                     sessionStorage.setItem("isLoggedIn", "1");
-                    localStorage.setItem("welcome", "1");
-                    location.href = "home.html";
+                    localStorage.setItem("username", data.info.username);
+                    localStorage.setItem("user_type", data.user_type);
+                    localStorage.setItem("user_id", data.user_id);
+                    localStorage.setItem("enabled", data.info.enabled);
+                    localStorage.setItem("email", data.info.email);
+
+                    if (data.user_type == 2) {
+                        localStorage.setItem("gender", data.info.gender);
+                        localStorage.setItem("welcome", "1");
+                        location.href = "home.html";
+                    } else {
+                        location.href = "admin.html";
+                    }
                 } else if (data.success == 0) {
                     sys_warning(data.message);
                     $(".btnSubmit").attr('disabled', false);

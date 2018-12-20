@@ -48,7 +48,7 @@ $(function () {
                     $(".feed_container").html('');
                 }
                 for (var i = 0; i < data.length; i++) {
-                    var enabled = ` <i class="material-icons tiny">people</i> &nbsp; Everyone`;
+                    var enabled = ` <i class="material-icons tiny">langauge</i> &nbsp; Everyone`;
                     var onlyeveryone = `<li><a class="onlyeveryoneBtn" data-enabled="${data[i].enabled}" data-value="${data[i].feed_id}" >Only Me</a></li>`;
                     if (data[i].enabled == 0) {
                         enabled = ` <i class="material-icons tiny">lock</i> &nbsp; Only Me`;
