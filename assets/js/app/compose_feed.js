@@ -47,19 +47,18 @@ $(function () {
             $(".feed_op").val(localStorage.getItem("username"));
         }
     });
-    /*     $("textarea").on("keypress", function (e) {
-            var key = e.keyCode;
-    
-            // If the user has pressed enter
-            if (key == 13) {
-                let myval = $("textarea").val();
-                myval += " >\r";
-                $("textarea").val(myval)
-                return false;
-            }
-            else {
-                return true;
-            }
-        }); */
+
+
+    // Filter Bad Words
+    function BlockBadWords(content) {
+        var badWords = /tang ina|hayup|hayop|ogag|suicide|mamatay|pakamatay|magpakamatay|fuck|shit|puta|pota|fck|fvck|vovo|tnga|gago|king ina|kupal|putang ina|putangina|pota|bobo|tanga/gi;
+        return content.replace(badWords, "*********");
+    }
+
+
+    $("textarea").on("keydown", function (e) {
+        var newc = BlockBadWords($(this).val());
+        $(this).val(newc)
+    });
 
 })

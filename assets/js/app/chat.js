@@ -278,4 +278,15 @@ $(function () {
         $(".chat-avatar img").attr('src', './assets/img/avatar/' + localStorage.getItem("juvy_avatar"));
     }, 600);
 
+    // Filter Bad Words
+    function BlockBadWords(content) {
+        var badWords = /tang ina|hayup|hayop|ogag|suicide|mamatay|pakamatay|magpakamatay|fuck|shit|puta|pota|fck|fvck|vovo|tnga|gago|king ina|kupal|putang ina|putangina|pota|bobo|tanga|inutil/gi;
+        return content.replace(badWords, "****");
+    }
+
+    $("textarea").on("keydown", function (e) {
+        var newc = BlockBadWords($(this).val());
+        $(this).val(newc)
+    });
+
 })
