@@ -20,6 +20,7 @@ $(function () {
                     localStorage.setItem("username", data.info.username);
                     localStorage.setItem("email", data.info.email);
                     localStorage.setItem("gender", data.info.gender);
+                    localStorage.setItem("juvy_avatar", data.info.juvy_avatar);
                     localStorage.setItem("enabled", data.info.enabled);
 
                     sessionStorage.setItem("isLoggedIn", "1");

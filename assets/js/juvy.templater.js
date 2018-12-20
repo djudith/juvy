@@ -57,7 +57,7 @@ const convo_topnav = `
         <div class="nav-wrapper">
             <a href="home.html" class="sidenav-trigger show-on-large"><i class="material-icons">arrow_back</i></a>
             <div class="chat-avatar d-flex align-items-center ">
-                <img src="./assets/img/avatar/8.png" class=" rounded-circle " width="30" alt="">
+                <img src="./assets/img/avatar/juvy.png" class=" rounded-circle " width="30" alt="">
             </div>
             <a  class="brand-logo" style="font-size: 1.5em;">
                 Juvy

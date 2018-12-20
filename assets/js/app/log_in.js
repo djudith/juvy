@@ -24,6 +24,7 @@ $(function () {
                     localStorage.setItem("email", data.info.email);
 
                     if (data.user_type == 2) {
+                        localStorage.setItem("juvy_avatar", data.info.juvy_avatar);
                         localStorage.setItem("gender", data.info.gender);
                         localStorage.setItem("welcome", "1");
                         location.href = "home.html";

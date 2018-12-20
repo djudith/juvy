@@ -273,5 +273,9 @@ $(function () {
         $('#sharingTipsModal').modal('close');
     });
 
+    refreshVerified();
+    setTimeout(() => {
+        $(".chat-avatar img").attr('src', './assets/img/avatar/' + localStorage.getItem("juvy_avatar"));
+    }, 600);
 
 })

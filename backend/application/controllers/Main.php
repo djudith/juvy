@@ -30,6 +30,12 @@ class Main extends CI_Controller{
         $this->model->updatedb('jv_users',['enabled'=>1],['username'=>$username]);
         echo "<br><br><br><br><br><br><center><h1>Account successfully activated. <br>You may now go back to Juvy and use your account. <br> Thank you!</h1></center>";
     }
+    public function change_avatar(){
+        $f = sanitize_array($this->input->post(null,true));
+        $this->model->updatedb('jv_users',$f,['user_id'=>$f['user_id']]);
+        $data = ['success'=>1];
+        generate_json($data);
+    }
 
     public function login(){
         $f = sanitize_array($this->input->post(null,true));

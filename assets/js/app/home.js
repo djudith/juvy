@@ -19,5 +19,45 @@ $(function () {
         localStorage.removeItem('new_member')
     }
 
+    refreshVerified();
+    setTimeout(() => {
+        $(".juvy_avatar").attr('src', './assets/img/avatar/' + localStorage.getItem("juvy_avatar"));
+    }, 600);
+    /* setTimeout(() => {
+        $(".avatar_tips").fadeOut('slow');
+    }, 7000); */
+    $(".juvy_avatar").click(function (e) {
+        e.preventDefault();
+        $("#juvyAvatarModal").modal('open')
+    });
+
+    for (var i = 1; i <= 16; i++) {
+        var content = `<img data-file="${i}.png" src="./assets/img/avatar/${i}.png" class="p-2 select_juvy_avatar" width="60" height="60">`
+        $("#juvyAvatarModal .image_cons").append(content);
+    }
+
+    $("#juvyAvatarModal").delegate('.select_juvy_avatar', 'click', function (e) {
+        e.preventDefault();
+        var juvy_avatar = $(this).data('file');
+        var user_id = localStorage.getItem("user_id");
+        $.ajax({
+            type: "POST",
+            url: base_url + "main/change_avatar",
+            data: { juvy_avatar, user_id },
+            success: function (data) {
+                if (data.success == 1) {
+                    sys_success('Avatar successfully changed')
+                    refreshVerified();
+                    setTimeout(() => {
+                        $(".juvy_avatar").attr('src', './assets/img/avatar/' + localStorage.getItem("juvy_avatar"));
+                    }, 600);
+                    $("#juvyAvatarModal").modal('close')
+                } else {
+                    sys_error();
+                }
+            }
+        });
+    });
+
 
 })

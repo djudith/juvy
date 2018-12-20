@@ -147,6 +147,7 @@ function refreshVerified() {
             localStorage.setItem("email", data.email);
             localStorage.setItem("enabled", data.enabled);
             localStorage.setItem("gender", data.gender);
+            localStorage.setItem("juvy_avatar", data.juvy_avatar);
             sessionStorage.setItem("isLoggedIn", "1");
         }
     });
