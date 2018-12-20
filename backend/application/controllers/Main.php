@@ -16,8 +16,8 @@ class Main extends CI_Controller{
                 $query = $this->model->insertdb('jv_users',$f);
 
                 // email
-                $data = ['username'=>$f['username'],'href'=>base_url('main/verify_account_email')];
-                $body = $this->load->view('email_forgot',$data,true);
+                $data = ['username'=>$f['username'],'href'=>base_url('main/verify_account_email/'.$f['username'])];
+                $body = $this->load->view('email_confirm',$data,true);
                 // $this->send_mail($f['email'],'JUVY - Email Verification',$body);
 
 
@@ -25,6 +25,10 @@ class Main extends CI_Controller{
             }
         }
         generate_json($data);
+    }
+    public function verify_account_email($username){
+        $this->model->updatedb('jv_users',['enabled'=>1],['username'=>$username]);
+        echo "<br><br><br><br><br><br><center><h1>Account successfully activated. <br>You may now go back to Juvy and use your account. <br> Thank you!</h1></center>";
     }
 
     public function login(){
