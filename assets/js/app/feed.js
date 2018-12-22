@@ -36,7 +36,16 @@ $(function () {
                     $(".feed_container").html('');
                 }
                 for (var i = 0; i < data.length; i++) {
-                    var html = `<a data-feed_id="${data[i].feed_id}" class="btnViewPost"> 
+                    var show = false;
+                    if (data[i].enabled == 1) {
+                        show = true;
+                    } else {
+                        if (data[i].user_id == localStorage.getItem("user_id")) {
+                            show = true;
+                        }
+                    }
+                    if (show) {
+                        var html = `<a data-feed_id="${data[i].feed_id}" class="btnViewPost"> 
                                     <div class="card">
                                         <div class="card-content">
                                             <p class="truncate">${data[i].feed_content}</p>
@@ -47,7 +56,8 @@ $(function () {
                                         </div>
                                     </div>
                                </a>`
-                    $(".feed_container").append(html);
+                        $(".feed_container").append(html);
+                    }
                 }
                 $("time.timeago").timeago();
             }

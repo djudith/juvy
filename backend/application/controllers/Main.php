@@ -192,7 +192,7 @@ class Main extends CI_Controller{
         generate_json($data);
     }
     public function getFeed(){
-        $query = $this->model->getdb('jv_feed',['enabled'=>1],'feed_date','DESC');
+        $query = $this->model->querydb('SELECT * FROM `jv_feed` WHERE enabled = ? OR enabled = ? ORDER BY feed_date DESC ',[1,-2]);
         generate_json($query->result());
     }
     public function getAdminFeed(){

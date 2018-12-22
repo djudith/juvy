@@ -1,4 +1,5 @@
 $(function () {
+    isLoggedIn();
 
     // json array of the chat 
     const aiml = (function () {
