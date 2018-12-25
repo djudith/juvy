@@ -25,7 +25,8 @@ $(function () {
 
                     sessionStorage.setItem("isLoggedIn", "1");
                     localStorage.setItem("welcome", "1");
-                    location.href = "home.html";
+                    var loc = location.hash;
+                    location.href = loc.replace("#","");
                 } else if (data.success == 0) {
                     sys_warning(data.message);
                     $(".btnSubmit").attr('disabled', false);

@@ -17,15 +17,8 @@ $(function () {
     })();
 
     // for undefined answer
-    const fallback_response = {
-        "pattern": "fallback_response",
-        "template": [
-            "Oops! >> I didn't get that >> Ano ngang sinasabi mo ulet? ",
-            "Sorry, chinarge ko kase si phone >> Ano nga ulet yun?",
-            "Hmm. >> Currently, Di ko alam ang isasagot sa sinabe mo sorry."
-        ],
-        "return": "txtbox"
-    };
+    const fallback_response = ["Hmm. Di ko gets.", "Di ko mabasa masyado.", "Sorry ah nag charge lang ako."];
+    var fallback_response_called = false;
 
     // call sign if male of female
     const cs_fm = {
@@ -36,6 +29,10 @@ $(function () {
 
     // dito save ung pinaka last na sinabe ni juvy
     var latest_juvy_response;
+
+    // dito naman save ung mga possible next patterns lang na pede puntahan ng convo. 
+    // so unang una pagkaload ng page, ung startConversation ang pattern naten .
+    var nextPattern = ["startConversation"];
 
     // flag ng sharing , kpag gusto mag share ni user magiging true to
     var isSharing, sharing = false;
@@ -53,27 +50,45 @@ $(function () {
                 return arr[i];
             }
         }
-        return fallback_response;
+        return fallbxack_response;
     }
 
     // search in json
     function search_matching(arr, val = '') {
         var tmp;
-        var sharingPatterns = ['usap', 'talk', 'share'];
-        for (i = 0; i < arr.length; i++) {
-            tmp = arr[i].pattern.split(",");
-            for (ii = 0; ii < tmp.length; ii++) {
-                if (val.includes(tmp[ii])) {
-                    if ($.inArray(tmp[ii], sharingPatterns) !== -1) {
-                        sharing = true;
-                        isSharing = true;
+        var sharingPatterns = ['usap', 'share', 'talk', 'kwento', 'kuwento'];
+        var tmpNxtPattern = nextPattern;
+        var flagForSearch = false;
+
+        if (tmpNxtPattern.length != 0) {
+            for (var nx = 0; nx < tmpNxtPattern.length; nx++) {
+                if (val.includes(tmpNxtPattern[nx])) {
+                    flagForSearch = true;
+                }
+            }
+        } else {
+            flagForSearch = true;
+        }
+
+        if (flagForSearch) {
+            for (i = 0; i < arr.length; i++) {
+                tmp = arr[i].pattern.split(",");
+                for (ii = 0; ii < tmp.length; ii++) {
+                    if (val.includes(tmp[ii])) {
+                        if ($.inArray(tmp[ii], sharingPatterns) !== -1) {
+                            sharing = true;
+                            isSharing = true;
+                        }
+                        nextPattern = arr[i].nextPattern;
+                        // console.log(nextPattern)
+                        fallback_response_called = false;
+                        return arr[i];
+                        // console.log(arr[i])
                     }
-                    return arr[i];
-                    // console.log(arr[i])
                 }
             }
         }
-        // console.log(fallback_response);
+        fallback_response_called = true;
         return latest_juvy_response;
     }
 
@@ -100,7 +115,7 @@ $(function () {
         $("#answerModal").modal('close');
 
         if (isSharing) {
-            let data = search_matching(aiml, 'somethingShared');
+            let data = search_matching(aiml, 'somethingShared'); // "somethingShared" ung pattern na pag nag share na si user ng something kakemehan nya
             let say = data['template'][Math.floor((Math.random() * data['template'].length))];
             juvy_say(say, data, pattern);
             isSharing = false;
@@ -122,6 +137,10 @@ $(function () {
             $(".chat-container").append(`<div class="baloon2 typing_bubble"><img src="./assets/img/typing.gif" width="30"></div>`)
             setTimeout(() => {
                 $(".typing_bubble").remove();
+                if (fallback_response_called) {
+                    $(".chat-container").append(`<div class="baloon2">${fallback_response[Math.floor((Math.random() * fallback_response.length))].replace("%cs%", cs)}</div>`);
+                    fallback_response_called = false;
+                }
                 $(".chat-container").append(`<div class="baloon2">${arrwords[i].replace("%cs%", cs)}</div>`)
                 $("html, body").animate({ scrollTop: $(document).height() }, 500); // force the page to scroll down.
 
@@ -269,9 +288,13 @@ $(function () {
     // ung send button sa modal ng sharing
     $(".shareSend").click(function (e) {
         e.preventDefault();
-        $(".btnSend").click();
-        $("#reply_txtbox").detach().prependTo('.user_textarea > .d-flex ')
-        $('#sharingTipsModal').modal('close');
+        if ($("#reply_txtbox").val() != "") {
+            $(".btnSend").click();
+            $("#reply_txtbox").detach().prependTo('.user_textarea > .d-flex ')
+            $('#sharingTipsModal').modal('close');
+        } else {
+            $("#reply_txtbox").focus()
+        }
     });
 
     refreshVerified();

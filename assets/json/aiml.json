@@ -4,28 +4,80 @@
         "template": [
             "Uy %cs%! Long time no chat haha. >> May kwento ka bang gusto i-share? Tara usap tayo.>> O gusto mo makinig ng mga music? >> Or baka gusto mo manood ng inspirational videos?"
         ],
-        "return": "txtbox"
-    }, 
+        "return": "txtbox",
+        "nextPattern": [
+            "usap",
+            "share",
+            "talk",
+            "kwento",
+            "kuwento",
+            "music",
+            "tugtog",
+            "kinig",
+            "kanta",
+            "video",
+            "nuod",
+            "bye",
+            "goodbye",
+            "paalam",
+            "babye"
+        ]
+    },
     {
         "pattern": "askUser",
         "template": [
             "May kwento ka bang gusto i-share? Tara usap tayo.>> Gusto mo makinig ng mga music? >> O gusto mo manood ng inspirational videos?"
         ],
-        "return": "txtbox"
+        "return": "txtbox",
+        "nextPattern": [
+            "usap",
+            "share",
+            "talk",
+            "kwento",
+            "kuwento",
+            "music",
+            "tugtog",
+            "kinig",
+            "kanta",
+            "video",
+            "nuod",
+            "bye",
+            "goodbye",
+            "paalam",
+            "babye"
+        ]
     },
     {
         "pattern": "doneSharing",
         "template": [
             "So, may kwento ka pa bang gusto i-share o pag usapan %cs%?? >> Gusto mo pa makinig ng mga music? >> Or baka gusto mo pa manood ng inspirational videos?"
         ],
-        "return": "txtbox"
+        "return": "txtbox",
+        "nextPattern": [
+            "usap",
+            "share",
+            "talk",
+            "kwento",
+            "kuwento",
+            "music",
+            "tugtog",
+            "kinig",
+            "kanta",
+            "video",
+            "nuod",
+            "bye",
+            "goodbye",
+            "paalam",
+            "babye"
+        ]
     },
     {
         "pattern": "usap,share,talk,kwento,kuwento",
         "template": [
             "Ah sige, anong gusto mo pag usapan %cs%? >> puwede mo yan ishare saken"
         ],
-        "return": "txtbox"
+        "return": "txtbox",
+        "nextPattern": []
     },
     {
         "pattern": "somethingShared",
@@ -39,7 +91,8 @@
                 "pattern": "doneSharing",
                 "display": "Ok thanks."
             }
-        ]
+        ],
+        "nextPattern": []
     },
     {
         "pattern": "music,tugtog,kinig,kanta",
@@ -53,7 +106,8 @@
                 "pattern": "",
                 "display": "Choose Song"
             }
-        ]
+        ],
+        "nextPattern": []
     },
     {
         "pattern": "video,nuod",
@@ -67,28 +121,32 @@
                 "pattern": "",
                 "display": "Choose Videos"
             }
-        ]
+        ],
+        "nextPattern": []
     },
     {
         "pattern": "doneaud",
         "template": [
             "So kamusta ang pakikinig? >> Did you feel better or still the same mood?"
         ],
-        "return": "txtbox"
+        "return": "txtbox",
+        "nextPattern": []
     },
     {
         "pattern": "donevid",
         "template": [
             "So kamusta ang panunuod? >> Did you feel better or still the same mood?"
         ],
-        "return": "txtbox"
+        "return": "txtbox",
+        "nextPattern": []
     },
     {
         "pattern": "ok,feel better,felt better,better",
         "template": [
             "Buti naman kung ganun >> May kwento ka pa bang gusto i-share? Tara usap tayo. >> Gusto mo makinig ng mga music? >> O gusto mo manood ng inspirational videos?"
         ],
-        "return": "txtbox"
+        "return": "txtbox",
+        "nextPattern": []
     },
     {
         "pattern": "bye,goodbye,paalam,babye",
@@ -106,6 +164,7 @@
                 "pattern": "home.html",
                 "display": "Thank you!"
             }
-        ]
+        ],
+        "nextPattern": []
     }
 ]

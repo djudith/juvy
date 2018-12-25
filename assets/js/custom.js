@@ -107,10 +107,10 @@ const sys_confirm = (title, msg, oklabel, cancellabel, okcb, cancelcb) => {
 }
 const isLoggedIn = () => {
     if (localStorage.getItem("userIsLoggedIn") === null) { // walang naka login
-        sys_alert('Log in', 'Log in is required. Please log in using your account.', function () { location.href = "log_in.html"; })
+        sys_alert('Log in', 'Log in is required. Please log in using your account.', function () { location.href = "log_in.html#" + location.href; })
     } else { // merong naka login
         if (sessionStorage.getItem("isLoggedIn") != "1") { // kapag tapos na ung session
-            sys_alert('Session Expired', 'To make your data secured, we have logged out your account after you left. Please enter your password again.', function () { location.href = "re_login.html"; })
+            sys_alert('Session Expired', 'To make your data secured, we have logged out your account after you left. Please enter your password again.', function () { location.href = "re_login.html#" + location.href; })
         } else {
             displayUser();
             $(".loadingOverlay").fadeOut('fast');
