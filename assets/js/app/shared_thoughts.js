@@ -40,7 +40,7 @@ $(function () {
     function getFeedByUsr() {
         $.ajax({
             type: "get",
-            url: base_url + "main/getFeedByUsr/" + localStorage.getItem("user_id"),
+            url: base_url + "main/get_shared_thoughts_by_user/" + localStorage.getItem("user_id"),
             success: function (data) {
                 if (data.length <= 0) {
                     $(".feed_container").html('<center>No posts available</center>');

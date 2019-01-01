@@ -150,10 +150,26 @@ class Main extends CI_Controller{
                 $this->model->updatedb('jv_users',['password'=>en_dec('en',$f['password'])],['user_id'=>$user_id]);
                 $data = ['success'=>1];
             } else {
-                $data = ['success'=>0,'message'=>'Re-type New password did not match with New password'];
+                $data = ['success'=>0,'message'=>'Re-type New password did not match'];
             }
         } else {
             $data = ['success'=>0,'message'=>'Old password is not correct'];
+        }
+        generate_json($data);
+    }
+
+    public function updateSecretCode($user_id){
+        $f = sanitize_array($this->input->post(null,true));
+        $info = $this->model->getdb('jv_users',['user_id'=>$user_id])->row();
+        if($info->secret_pass == en_dec('en',$f['old_password'])){
+            if($f['new_password']==$f['secret_pass']){
+                $this->model->updatedb('jv_users',['secret_pass'=>en_dec('en',$f['secret_pass'])],['user_id'=>$user_id]);
+                $data = ['success'=>1];
+            } else {
+                $data = ['success'=>0,'message'=>'Re-type New secret code did not match'];
+            }
+        } else {
+            $data = ['success'=>0,'message'=>'Old secret code is not correct'];
         }
         generate_json($data);
     }
@@ -201,6 +217,10 @@ class Main extends CI_Controller{
     }
     public function getFeedByUsr($user_id){
         $query = $this->model->getdb('jv_feed',['enabled !='=>-1,'enabled !='=>-2,'user_id'=>$user_id],'feed_date','DESC');
+        generate_json($query->result());
+    }
+    public function get_shared_thoughts_by_user($user_id){
+        $query = $this->model->getdb('jv_feed',['enabled !='=>-1,'user_id'=>$user_id],'feed_date','DESC');
         generate_json($query->result());
     }
     public function deleteFeed(){

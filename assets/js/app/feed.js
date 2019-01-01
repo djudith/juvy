@@ -39,7 +39,7 @@ $(function () {
                     var show = false;
                     if (data[i].enabled == 1) {
                         show = true;
-                    } else {
+                    } else if (data[i].enabled == -2) {
                         if (data[i].user_id == localStorage.getItem("user_id")) {
                             show = true;
                         }

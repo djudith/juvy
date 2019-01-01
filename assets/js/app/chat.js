@@ -16,16 +16,64 @@ $(function () {
         return json;
     })();
 
-    // for undefined answer
+    // for undefined answer idadagdag nya to sa unahan ng last chat ni juvy
     const fallback_response = ["Hmm. Di ko gets.", "Di ko mabasa masyado.", "Sorry ah nag charge lang ako."];
     var fallback_response_called = false;
 
+    // json array ng response ni juvy base sa kung ano ung nishare ni user
+    const sharing_response = [
+        {
+            "pattern": "family,mama,nanay,mom,kua,kuya,ate,bro,sister,papa,tatay,father,dad,pamilya",
+            "template": [
+                "Nag share ka about sa family mo nice.>> Minsan talaga magandang may nakakausap ka. keme keme bum"
+            ],
+            "return": "button",
+            "answers": [
+                {
+                    "returnForm": "button",
+                    "pattern": "doneSharing",
+                    "display": "Ok thanks."
+                }
+            ],
+            "nextPattern": []
+        },
+        {
+            "pattern": "teacher,school",
+            "template": [
+                "Nag share ka about sa school mo nice.>> Minsan talaga magandang may nakakausap ka. keme keme bum"
+            ],
+            "return": "button",
+            "answers": [
+                {
+                    "returnForm": "button",
+                    "pattern": "doneSharing",
+                    "display": "Ok thanks."
+                }
+            ],
+            "nextPattern": []
+        },
+    ]
+    const sharing_response_default = {
+        "pattern": "somethingShared",
+        "template": [
+            "Happy ako na naishare mo yan sakin %cs%. >> Minsan talaga magandang may nakakausap ka. >> kase keme keme keme"
+        ],
+        "return": "button",
+        "answers": [
+            {
+                "returnForm": "button",
+                "pattern": "doneSharing",
+                "display": "Ok thanks."
+            }
+        ],
+        "nextPattern": []
+    }
     // call sign if male of female
     const cs_fm = {
-        M: ['pre', 'par', 'man', 'tol'],
-        F: ['sis', 'bii', 'be', 'mars'],
+        M: ['pre', 'par', 'tol'], // kapag M(male) dito mo lagay mga list ng tawagan nila haha
+        F: ['sis', 'be'], // kapag F(female) dito mo lagay mga list ng tawagan nila haha
     };
-    let cs;
+    let cs; // eto dito iistore ung randomized tawagan nila depende sa list
 
     // dito save ung pinaka last na sinabe ni juvy
     var latest_juvy_response;
@@ -38,8 +86,8 @@ $(function () {
     var isSharing, sharing = false;
 
     // eto ung speed ng pag tatype ni juvy
-    var juvy_bubble_delay = 1;
-    // var juvy_bubble_delay = Math.floor(Math.random() * (1500 - 500 + 1)) + 1000;
+    // var juvy_bubble_delay = 1;
+    var juvy_bubble_delay = Math.floor(Math.random() * (1500 - 500 + 1)) + 1000;
 
 
     // search in json (deprecated)
@@ -53,10 +101,10 @@ $(function () {
         return fallbxack_response;
     }
 
-    // search in json
+    // search in json base on pattern
     function search_matching(arr, val = '') {
         var tmp;
-        var sharingPatterns = ['usap', 'share', 'talk', 'kwento', 'kuwento'];
+        var sharingPatterns = ['usap', 'share', 'talk', 'kwento', 'kuwento']; // take note kung ano ang patterns ng nasa aiml.json about sa pag share or usap, dapat un ang andito para madetect naten kung nag sheshare ba tong si user o hndi...
         var tmpNxtPattern = nextPattern;
         var flagForSearch = false;
 
@@ -92,6 +140,23 @@ $(function () {
         return latest_juvy_response;
     }
 
+    // search ng tamang reply ni juvy kapag nag share si user
+    function search_juvy_reply_in_sharing(arr, val = '') {
+        var tmp;
+        for (i = 0; i < arr.length; i++) {
+            tmp = arr[i].pattern.split(",");
+            for (ii = 0; ii < tmp.length; ii++) {
+                if (val.includes(tmp[ii])) {
+                    nextPattern = arr[i].nextPattern;
+                    return arr[i];
+                }
+            }
+        }
+        return sharing_response_default;
+    }
+
+
+
     // detect what gender then set callsign
     function get_cs_callsign() {
         var gender = localStorage.getItem("gender")
@@ -115,7 +180,7 @@ $(function () {
         $("#answerModal").modal('close');
 
         if (isSharing) {
-            let data = search_matching(aiml, 'somethingShared'); // "somethingShared" ung pattern na pag nag share na si user ng something kakemehan nya
+            let data = search_juvy_reply_in_sharing(sharing_response, pattern); // "somethingShared" ung pattern na pag nag share na si user ng something kakemehan nya
             let say = data['template'][Math.floor((Math.random() * data['template'].length))];
             juvy_say(say, data, pattern);
             isSharing = false;
