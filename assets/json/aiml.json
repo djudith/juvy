@@ -2,7 +2,10 @@
     {
         "pattern": "startConversation",
         "template": [
-            "Uy %cs%! Long time no chat haha. >> May kwento ka bang gusto i-share? Tara usap tayo.>> O gusto mo makinig ng mga music? >> Or baka gusto mo manood ng inspirational videos?"
+            "Hello! Kamusta? Ok ba ang araw mo o medyo hindi maganda? >> Kwento ka usap tayo >> kung di mo trip baka gusto mo nalang makinig ng music >> o kaya  naman videos baka trip mo manuod? Para naman gumanda mood mo",
+            "Uy! mukang kailangan mo ng kausap ah >> busy ba ang buong tropa? >> Ano gusto mo ba magkwento? >> Kung ayaw mo naman ok lang yun, makinig kana lang ng music, may videos din kung trip mo manuod >> Ano gusto mo?",
+            "Musta? Hind ba maganda araw mo? baka gusto mo magshare >> kung trip mo naman magsenti may music ako na pwede mong pakinggan >> o videos na pwedeng mapanuod.",
+            "Kamusta araw mo? Gusto mo magkwento? >> Music baka trip mo makinig? >> Eh videos, meron ako dito. Ano gusto mo?"
         ],
         "return": "txtbox",
         "nextPattern": [
@@ -50,7 +53,7 @@
     {
         "pattern": "doneSharing",
         "template": [
-            "So, may kwento ka pa bang gusto i-share o pag usapan %cs%?? >> Gusto mo pa makinig ng mga music? >> Or baka gusto mo pa manood ng inspirational videos?"
+            "So, may kwento ka pa bang gusto i-share o pag usapan %cs%?? >> Gusto mo pa makinig ng mga kanta? >> Or baka gusto mo pa manood ng inspirational videos?"
         ],
         "return": "txtbox",
         "nextPattern": [
@@ -74,7 +77,10 @@
     {
         "pattern": "usap,share,talk,kwento,kuwento",
         "template": [
-            "Ah sige, anong gusto mo pag usapan %cs%? >> puwede mo yan ishare saken"
+            "Ah sige, ano ba yan %cs% share mo saken.",
+            "Sige %cs% kwento ka makikinig ako.",
+            "Mukang seryoso ah, sige kwento mo saken yan %cs%",
+            "Ok %cs% tara pagusapan naten yan."
         ],
         "return": "txtbox",
         "nextPattern": []
@@ -82,7 +88,10 @@
     {
         "pattern": "somethingShared",
         "template": [
-            "Happy ako na naishare mo yan sakin %cs%. >> Minsan talaga magandang may nakakausap ka. >> kase keme keme keme"
+            "Happy ako na naishare mo yan sakin %cs%. >> Wala ng mas sasarap pa sa pakiramdam ng makapagshare.",
+            "Buti naman naishare mo yan saken para di mo sinosolo ang problema, mas magandang may kahati ka para di gaano mabigat. diba %cs%?",
+            "Medyo hindi nga maganda yung araw mo %cs% salamat at naishare mo yan saken. >> malaking bagay yung makapagshare, nababawasan yung bigat ng problema.",
+            "Problema nga yan, mabuti naman naishare o kahit na medyo hindi maganda yung pinagdadaanan mo %cs%"
         ],
         "return": "button",
         "answers": [
@@ -97,7 +106,9 @@
     {
         "pattern": "music,tugtog,kinig,kanta",
         "template": [
-            "Marami akong music dito %cs%>> pili ka lang >> makakahelp to sa mood mo"
+            "Music lover naman pala hahahaha >> Marami akong music dito %cs%>> pili ka lang.",
+            "Mukang mas trip mo magsenti ah >> Ok yan, pili ka ng trip mo pakinggan.",
+            "Ay gusto magdrama hahahaha >> Makinig kana lang ng music baka sakaling maging ok ka."
         ],
         "return": "button",
         "answers": [
@@ -112,7 +123,9 @@
     {
         "pattern": "video,nuod",
         "template": [
-            "Marami akong videos dito %cs%>> sabi nila nakakahelp daw to boost mood. >> pili ka "
+            "Mukang trip mo mainspire ngayon %cs% ah >> may mga videos din akong nakakatawa >> pili ka.",
+            "Hmmm... masarap naman talaga makinig ng kwento ng iba, maiinspire ka >> pili kana lang %cs%.",
+            "Madaming aral ang makukuha mo sa videos na meron ako, sana makatulong sayo %cs%"
         ],
         "return": "button",
         "answers": [

@@ -16,6 +16,8 @@ $(function () {
         return json;
     })();
 
+    
+
     // for undefined answer idadagdag nya to sa unahan ng last chat ni juvy
     const fallback_response = ["Hmm. Di ko gets.", "Di ko mabasa masyado.", "Sorry ah nag charge lang ako."];
     var fallback_response_called = false;
@@ -25,31 +27,34 @@ $(function () {
         {
             "pattern": "family,mama,nanay,mom,kua,kuya,ate,bro,sister,papa,tatay,father,dad,pamilya",
             "template": [
-                "Nag share ka about sa family mo nice.>> Minsan talaga magandang may nakakausap ka. keme keme bum"
+                "Ah about sa pamilya pala %cs%, hindi naman talaga madali kapag usapang problema ng pamilya >> parang kakambal na kasi ng buhay ang problema, di yan mawawala sa pamilya >> minsan akala naten pinagtitripan na tayo eh >> pero kapag nalampasan naman naten magiging isang aral o alaala nalang yng problemang akala naten wala ng solusyon. Diba %cs% ?",
+                "Ah tungkol pala sa pamilya %cs% Kapag usapang pamilya talaga iba eh noh? iba yung impact saten >> dumadating talaga sa puntong susukuan mo sa sobrang hirap o kaya naman dahil hindi mo kinakaya >> pero ang mahalaga naman pagtapos naten sukuan sinusubukan ulit nating kayanin.",
+                "Hindi nga madali yang pinagdadaanan mo lalo na kung tungkol sa pamilya %cs% >> pero kapag dumating sa puntong hindi mo na kaya, ipahinga mo lang saglit, kakayanin mo na ulit ng maraming beses. >> Ganyan naman tayo diba? Yung problema ang sumusuko saten hindi tayo HAHAHAHAHA",
+                "Problema nga yan kung tungkol sa pamilya %cs%."
             ],
-            "return": "button",
-            "answers": [
-                {
-                    "returnForm": "button",
-                    "pattern": "doneSharing",
-                    "display": "Ok thanks."
-                }
-            ],
+            "return": "txtbox",
             "nextPattern": []
         },
         {
-            "pattern": "teacher,school",
+            "pattern": "teacher,guro,guard,school,grades,maam,mam,ser,sir,classmates,kaklase,titser,grado,eskwelahan,marka",
             "template": [
-                "Nag share ka about sa school mo nice.>> Minsan talaga magandang may nakakausap ka. keme keme bum"
+                "Ah about pala sa school >> take it easy %cs%, daaanan mo lang yung ganyang stress, classmate mo man yan, grades o si maam at sir na madaming pinapagawa hahahaha >> di ko sinasabing madali yang problema mo ah >> ayoko lang isipin mong wala ng solusyon yan. kaya naman diba? isipin mo nalang matatapos ka din HAHAHAHA",
+                "About sa studies mo pala, di naman madali magaral eh di mawawala ang stress and pressure, lahat naman nakakaranas niyan, iba't ibang issue nga lang, yung iba about sa teacher na mababa magbigay ng grades o si classmate na pabida at walang pakisama hahahaha >> di ka nag-iisa tignan mo mga post sa facebook puro problema ng estudyante about sa pag-aaral diba %cs%? HAHAHAHA",
+                "Nako problema nga yan kung stress kana dahil sa studies mo %cs% >> madami talagang struggle sa pagaaral iba iba nga lang, yung iba nga si kuyang guard ang problema kasi mas masungit pa sa principal hahahaha >> di mawawala yang struggles mo hanggat nagaaral ka, diskarte lang talaga para malampasan mo."
             ],
-            "return": "button",
-            "answers": [
-                {
-                    "returnForm": "button",
-                    "pattern": "doneSharing",
-                    "display": "Ok thanks."
-                }
+            
+            "return": "txtbox",
+            "nextPattern": []
+        },
+        {
+            "pattern":"friends,kaibigan,tropa,barkada,bestfriend",
+            "template": [
+                "Ah tungkol pala sa pagkakaibigan %cs% >> mahalagang parte nga naman ng buhay ang kaibigan kaya malamang isa yan sa dahilan bat tayo nalulungkot.",
+                "About pala sa tropa kaya pala medyo di maganda araw mo >> wala naman problemang di natapos, kaya mo yan hindi man sa mga oras na to pero baka mamaya pwede na.",
+                "Kaya pala malungkot ka kasi tungkol pala sa tropa ang iniisip mo >> pero isang patunay na mahal mo sila dahil iniisip mo sila alam man nila o hindi."
             ],
+            
+            "return": "txtbox",
             "nextPattern": []
         },
     ]
@@ -294,7 +299,7 @@ $(function () {
         get_cs_callsign();
     });
 
-    // click event ng mga choose buttons sa choices
+    // click event ng mga choose buttons sa choicesm
     $("#musicModal, #answerModal, #answerContainerOption").delegate(".user_say_btn", "click", function () {
         $("#answerContainerOption").empty()
         var pattern = $(this).data('pattern');
