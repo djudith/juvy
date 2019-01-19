@@ -140,7 +140,7 @@
     {
         "pattern": "doneaud",
         "template": [
-            "So kamusta ang pakikinig? >> Did you feel better or still the same mood?"
+            "Kamusta ang pakikinig ng music? >> Ok ba %cs%?"
         ],
         "return": "txtbox",
         "nextPattern": []
@@ -148,7 +148,7 @@
     {
         "pattern": "donevid",
         "template": [
-            "So kamusta ang panunuod? >> Did you feel better or still the same mood?"
+            "So kamusta ang panunuod %cs% >> Nakatulong ba kahit papaano?"
         ],
         "return": "txtbox",
         "nextPattern": []
@@ -156,19 +156,28 @@
     {
         "pattern": "ok,feel better,felt better,better",
         "template": [
-            "Buti naman kung ganun >> May kwento ka pa bang gusto i-share? Tara usap tayo. >> Gusto mo makinig ng mga music? >> O gusto mo manood ng inspirational videos?"
+            "Buti naman kung ganun >> ano gusto mo ba mag-share? Tara usap tayo %cs%. >> O gusto mo naman manood ng inspirational videos?"
         ],
         "return": "txtbox",
         "nextPattern": []
     },
+
+    {
+        "pattern": "ok,feel better,felt better,better",
+        "template": [
+            "Masaya naman ako para sayo kung ganon >> ano gusto mo ba mag-share? Tara usap tayo. >> O gusto mo naman makinig ng mga music? "
+        ],
+        "return": "txtbox",
+        "nextPattern": []
+    },
+
     {
         "pattern": "bye,goodbye,paalam,babye",
         "template": [
-            "I am glad you talked to me >> You always have me >> Just drop a message anytime!",
-            "Got it. Later then >> Just chat me whenever you are free my friend",
-            "Chat you soon. I had a great time talking to you.",
-            "Thanks for the time, i enjoyed chatting with you.",
-            "Its nice talking to you. Till next time my friend."
+            "Masaya akong nakausap kita >> Lagi lang akong andito >> Chat ka lang anytime!",
+            "Ok sige, maya ulit >> Chat ka lang kapag gusto mo ng kausap",
+            "Chat tayo ulit next time. Thank you sa oras %cs%.",
+            "Salamat sa oras masaya akong nakausap kita."            
         ],
         "return": "hyperlink",
         "answers": [

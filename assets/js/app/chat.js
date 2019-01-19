@@ -51,26 +51,24 @@ $(function () {
             "template": [
                 "Ah tungkol pala sa pagkakaibigan %cs% >> mahalagang parte nga naman ng buhay ang kaibigan kaya malamang isa yan sa dahilan bat tayo nalulungkot.",
                 "About pala sa tropa kaya pala medyo di maganda araw mo >> wala naman problemang di natapos, kaya mo yan hindi man sa mga oras na to pero baka mamaya pwede na.",
-                "Kaya pala malungkot ka kasi tungkol pala sa tropa ang iniisip mo >> pero isang patunay na mahal mo sila dahil iniisip mo sila alam man nila o hindi."
+                "Kaya pala malungkot ka kasi tungkol pala sa tropa ang iniisip mo >> pero isang patunay na mahal mo sila dahil iniisip mo sila alam man nila o hindi.",
+                "Medyo hindi nga maganda araw mo kung tungkol sa kaibigan iniisip mo >> malaking parte sila ng buhay kaya talagang naapektuhan tayo."
             ],
             
             "return": "txtbox",
             "nextPattern": []
         },
     ]
-    const sharing_response_default = {
+    const sharing_response_default = { //When the shared msg is non of the above
         "pattern": "somethingShared",
         "template": [
-            "Happy ako na naishare mo yan sakin %cs%. >> Minsan talaga magandang may nakakausap ka. >> kase keme keme keme"
+            "Di ko ma-imagine yung hirap ng pinagdadaanan mo >> thank you kasi naishare mo yan saken. >> Isipin mo nalang matatapos din yan %cs%, sa tamang pagkakataon.",
+            "Di ko alam kung paano mo yan nakakayanan %cs% pero sigurado akong malakas ka kasi kinakaya mo bawat segundo. >> Madami ka pang pagdadaanan kailangan mo lang kayanin ngayon",
+            "Problema nga yan kung ganon. Buti naman naishare mo yan saken para naman di mo iniisip mag-isa. Sarap talaga minsan may makausap tungkol sa problema eh, nakakagaan ng loob, diba %cs%.",
+            "Hindi nga madali yang pinagdadaanan mo %cs% >> salamat at naishare mo yan saken ngayon >> sana gumaan kahit papaaano ang loob mo.",
+            "Hirap nga yan %cs% >> Hindi nga madali >> Pero kakayanin diba?"
         ],
-        "return": "button",
-        "answers": [
-            {
-                "returnForm": "button",
-                "pattern": "doneSharing",
-                "display": "Ok thanks."
-            }
-        ],
+        "return": "txtbox",
         "nextPattern": []
     }
     // call sign if male of female
