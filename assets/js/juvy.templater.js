@@ -89,8 +89,8 @@ const sidenav = `
 
 const bottom_nav = `
 <ul class="bottom_tabs  tabs home-tabs grey  lighten-3 ">
-    <li class="tab "><a href="#convo"><i class="material-icons">message</i></a></li>
-    <li class="tab "><a href="#feed" class="active"><i class="material-icons">rss_feed</i></a></li>
+    <li class="tab "><a href="#convo" class="active"><i class="material-icons">message</i></a></li>
+    <li class="tab "><a href="#feed"><i class="material-icons">rss_feed</i></a></li>
     <li class="tab "><a href="#secrets" class="secretTab"><i class="material-icons">lock</i></a></li>
     <li class="tab "><a href="#hopeline"><i class="material-icons">favorite_border</i></a></li>
 </ul>`;

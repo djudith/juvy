@@ -16,7 +16,7 @@ $(function () {
         return json;
     })();
 
-    
+
 
     // for undefined answer idadagdag nya to sa unahan ng last chat ni juvy
     const fallback_response = ["Hmm. Di ko gets.", "Di ko mabasa masyado.", "Sorry ah nag charge lang ako."];
@@ -42,19 +42,19 @@ $(function () {
                 "About sa studies mo pala, di naman madali magaral eh di mawawala ang stress and pressure, lahat naman nakakaranas niyan, iba't ibang issue nga lang, yung iba about sa teacher na mababa magbigay ng grades o si classmate na pabida at walang pakisama hahahaha >> di ka nag-iisa tignan mo mga post sa facebook puro problema ng estudyante about sa pag-aaral diba %cs%? HAHAHAHA",
                 "Nako problema nga yan kung stress kana dahil sa studies mo %cs% >> madami talagang struggle sa pagaaral iba iba nga lang, yung iba nga si kuyang guard ang problema kasi mas masungit pa sa principal hahahaha >> di mawawala yang struggles mo hanggat nagaaral ka, diskarte lang talaga para malampasan mo."
             ],
-            
+
             "return": "txtbox",
             "nextPattern": []
         },
         {
-            "pattern":"friends,kaibigan,tropa,barkada,bestfriend",
+            "pattern": "friends,kaibigan,tropa,barkada,bestfriend",
             "template": [
                 "Ah tungkol pala sa pagkakaibigan %cs% >> mahalagang parte nga naman ng buhay ang kaibigan kaya malamang isa yan sa dahilan bat tayo nalulungkot.",
                 "About pala sa tropa kaya pala medyo di maganda araw mo >> wala naman problemang di natapos, kaya mo yan hindi man sa mga oras na to pero baka mamaya pwede na.",
                 "Kaya pala malungkot ka kasi tungkol pala sa tropa ang iniisip mo >> pero isang patunay na mahal mo sila dahil iniisip mo sila alam man nila o hindi.",
                 "Medyo hindi nga maganda araw mo kung tungkol sa kaibigan iniisip mo >> malaking parte sila ng buhay kaya talagang naapektuhan tayo."
             ],
-            
+
             "return": "txtbox",
             "nextPattern": []
         },
@@ -87,9 +87,36 @@ $(function () {
 
     // flag ng sharing , kpag gusto mag share ni user magiging true to
     var isSharing, sharing = false;
+    var shareCount = 1;
+
+    // eto ung last reply ni juvy after that 2nd reply ni user during sharing event 
+    const sharing_last_response = {
+        "pattern": "2ndSharingReply",
+        "template": [
+            "Basta pag may gusto kang ishare na problem sabihin mo lang sken ok? >> So, may kwento ka pa bang gusto i-share o pag usapan %cs%?? >> Gusto mo pa makinig ng mga kanta? >> Or baka gusto mo pa manood ng inspirational videos?"
+        ],
+        "return": "txtbox",
+        "nextPattern": [
+            "usap",
+            "share",
+            "talk",
+            "kwento",
+            "kuwento",
+            "music",
+            "tugtog",
+            "kinig",
+            "kanta",
+            "video",
+            "nuod",
+            "bye",
+            "goodbye",
+            "paalam",
+            "babye"
+        ]
+    };
 
     // eto ung speed ng pag tatype ni juvy
-    // var juvy_bubble_delay = 1;
+    // var juvy_bubble_delay = 1; // for debugging, remove juvy typing delay
     var juvy_bubble_delay = Math.floor(Math.random() * (1500 - 500 + 1)) + 1000;
 
 
@@ -183,10 +210,22 @@ $(function () {
         $("#answerModal").modal('close');
 
         if (isSharing) {
-            let data = search_juvy_reply_in_sharing(sharing_response, pattern); // "somethingShared" ung pattern na pag nag share na si user ng something kakemehan nya
-            let say = data['template'][Math.floor((Math.random() * data['template'].length))];
-            juvy_say(say, data, pattern);
-            isSharing = false;
+            // let data = search_juvy_reply_in_sharing(sharing_response, pattern); // "somethingShared" ung pattern na pag nag share na si user ng something kakemehan nya
+            // let say = data['template'][Math.floor((Math.random() * data['template'].length))];
+            // juvy_say(say, data, pattern);
+            // isSharing = false;
+            if (shareCount == 2) {
+                let data = sharing_last_response;
+                let say = data['template'][Math.floor((Math.random() * data['template'].length))];
+                juvy_say(say, data, "2ndSharingReply");
+                isSharing = false;
+                shareCount = 0;
+            } else {
+                let data = search_juvy_reply_in_sharing(sharing_response, pattern); // "somethingShared" ung pattern na pag nag share na si user ng something kakemehan nya
+                let say = data['template'][Math.floor((Math.random() * data['template'].length))];
+                juvy_say(say, data, pattern);
+                shareCount += 1;
+            }
         } else {
             let data = search_matching(aiml, pattern);
             let say = data['template'][Math.floor((Math.random() * data['template'].length))];
