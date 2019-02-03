@@ -1,4 +1,5 @@
 [
+
     {
         "pattern": "startConversation",
         "template": [
@@ -29,7 +30,7 @@
     {
         "pattern": "askUser",
         "template": [
-            "May kwento ka bang gusto i-share? Tara usap tayo.>> Gusto mo makinig ng mga music? >> O gusto mo manood ng inspirational videos?"
+            "May kwento ka bang gusto i-share? Tara usap tayo.>> Gusto mo makinig ng mga music? >> O baka mas trip mo manood ng inspirational videos?"
         ],
         "return": "txtbox",
         "nextPattern": [
@@ -152,27 +153,20 @@
         ],
         "return": "txtbox",
         "nextPattern": []
-    },
+},
     {
         "pattern": "ok,feel better,felt better,better",
         "template": [
-            "Buti naman kung ganun >> ano gusto mo ba mag-share? Tara usap tayo %cs%. >> O gusto mo naman manood ng inspirational videos?"
+            "Buti naman kung ganun >> ano gusto mo ba mag-share? Tara usap tayo %cs%? >> O gusto mo naman manood ng inspirational videos or mas trip mo music?",
+            "Masaya naman ako para sayo kung ganon >> ano gusto mo ba mag-share? Tara usap tayo %cs%? >> O gusto mo naman manood ng inspirational videos or mas trip mo music?"
         ],
         "return": "txtbox",
         "nextPattern": []
     },
 
-    {
-        "pattern": "ok,feel better,felt better,better",
-        "template": [
-            "Masaya naman ako para sayo kung ganon >> ano gusto mo ba mag-share? Tara usap tayo. >> O gusto mo naman makinig ng mga music? "
-        ],
-        "return": "txtbox",
-        "nextPattern": []
-    },
 
     {
-        "pattern": "bye,goodbye,paalam,babye",
+        "pattern": "bye,goodbye,paalam,babye,wala,ayoko,none,maya,saka,chaka",
         "template": [
             "Masaya akong nakausap kita >> Lagi lang akong andito >> Chat ka lang anytime!",
             "Ok sige, maya ulit >> Chat ka lang kapag gusto mo ng kausap",
@@ -187,6 +181,7 @@
                 "display": "Thank you!"
             }
         ],
+        
         "nextPattern": []
     }
 ]

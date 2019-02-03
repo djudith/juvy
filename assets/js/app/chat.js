@@ -28,8 +28,11 @@ $(function () {
             "pattern": "family,mama,nanay,mom,kua,kuya,ate,bro,sister,papa,tatay,father,dad,pamilya",
             "template": [
                 "Ah about sa pamilya pala %cs%, hindi naman talaga madali kapag usapang problema ng pamilya >> parang kakambal na kasi ng buhay ang problema, di yan mawawala sa pamilya >> minsan akala naten pinagtitripan na tayo eh >> pero kapag nalampasan naman naten magiging isang aral o alaala nalang yng problemang akala naten wala ng solusyon. Diba %cs% ?",
+
                 "Ah tungkol pala sa pamilya %cs% Kapag usapang pamilya talaga iba eh noh? iba yung impact saten >> dumadating talaga sa puntong susukuan mo sa sobrang hirap o kaya naman dahil hindi mo kinakaya >> pero ang mahalaga naman pagtapos naten sukuan sinusubukan ulit nating kayanin.",
+
                 "Hindi nga madali yang pinagdadaanan mo lalo na kung tungkol sa pamilya %cs% >> pero kapag dumating sa puntong hindi mo na kaya, ipahinga mo lang saglit, kakayanin mo na ulit ng maraming beses. >> Ganyan naman tayo diba? Yung problema ang sumusuko saten hindi tayo HAHAHAHAHA",
+
                 "Problema nga yan kung tungkol sa pamilya %cs%."
             ],
             "return": "txtbox",
@@ -50,8 +53,11 @@ $(function () {
             "pattern": "friends,kaibigan,tropa,barkada,bestfriend",
             "template": [
                 "Ah tungkol pala sa pagkakaibigan %cs% >> mahalagang parte nga naman ng buhay ang kaibigan kaya malamang isa yan sa dahilan bat tayo nalulungkot.",
+
                 "About pala sa tropa kaya pala medyo di maganda araw mo >> wala naman problemang di natapos, kaya mo yan hindi man sa mga oras na to pero baka mamaya pwede na.",
+
                 "Kaya pala malungkot ka kasi tungkol pala sa tropa ang iniisip mo >> pero isang patunay na mahal mo sila dahil iniisip mo sila alam man nila o hindi.",
+                
                 "Medyo hindi nga maganda araw mo kung tungkol sa kaibigan iniisip mo >> malaking parte sila ng buhay kaya talagang naapektuhan tayo."
             ],
 
@@ -93,7 +99,11 @@ $(function () {
     const sharing_last_response = {
         "pattern": "2ndSharingReply",
         "template": [
-            "Basta pag may gusto kang ishare na problem sabihin mo lang sken ok? >> So, may kwento ka pa bang gusto i-share o pag usapan %cs%?? >> Gusto mo pa makinig ng mga kanta? >> Or baka gusto mo pa manood ng inspirational videos?"
+            "Basta kahit anong problema lagpasan mo lang ok? Wag mong tatambayan. >> Thank you sa pagshare saken nyan %cs%. >> Nga pala may ikekwento ka pa ba o gusto mo naman manuod ng video o kaya makinig ng music?>> Baka sakaling mas makagaan ng loob mo?",
+
+            "Minsan kelangan talagang dumating ng problema para makita kung gaano tayo katatag eh.>> pero wag mong isiping pinapahirapan ka isipin mong pinapapatatag ka lang ng panahon %cs%.>> May isheshare ka pa ba? Or gusto mo naman ng video at music?",
+
+            "Kahit ano pang problema ishare mo lang para kahit papano gumaan naman yang kalooban mo >> wag mong kimkimin mag-isa kasi di ka naman nang-iisa eh >> May videos ako baka trip mo mainspire? or gusto mo naman music para chill lang? o abaka may ishehsrae ka pa?"
         ],
         "return": "txtbox",
         "nextPattern": [
@@ -410,14 +420,14 @@ $(function () {
     }, 600);
 
     // Filter Bad Words
-    function BlockBadWords(content) {
-        var badWords = /tang ina|hayup|hayop|ogag|suicide|mamatay|pakamatay|magpakamatay|fuck|shit|puta|pota|fck|fvck|vovo|tnga|gago|king ina|kupal|putang ina|putangina|pota|bobo|tanga|inutil/gi;
-        return content.replace(badWords, "****");
-    }
+    //function BlockBadWords(content) {
+    //    var badWords = /tang ina|hayup|hayop|ogag|suicide|mamatay|pakamatay|magpakamatay|fuck|shit|puta|pota|fck|fvck|vovo|tnga|gago|king ina|kupal|putang ina|putangina|pota|bobo|tanga|inutil/gi;
+    //    return content.replace(badWords, "****");
+    //}
 
-    $("textarea").on("keydown", function (e) {
-        var newc = BlockBadWords($(this).val());
-        $(this).val(newc)
-    });
+    //$("textarea").on("keydown", function (e) {
+    //    var newc = BlockBadWords($(this).val());
+    //    $(this).val(newc)
+    //});
 
 })

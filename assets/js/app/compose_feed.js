@@ -51,7 +51,7 @@ $(function () {
 
     // Filter Bad Words
     function BlockBadWords(content) {
-        var badWords = /tang ina|hayup|hayop|ogag|suicide|mamatay|pakamatay|magpakamatay|fuck|shit|puta|pota|fck|fvck|vovo|tnga|gago|king ina|kupal|putang ina|putangina|pota|bobo|tanga/gi;
+        var badWords = /tang ina|tangina|hayup|hayop|ogag|suicide|mamatay|pakamatay|magpakamatay|fuck|shit|puta|pota|fck|fvck|vovo|tnga|gago|king ina|kupal|putang ina|putangina|pota|bobo|tanga/;
         return content.replace(badWords, "*********");
     }
 
