@@ -212,7 +212,11 @@ $(function () {
 
     // kpag nag reply si user
     function user_say(pattern, display) {
-        const html = `<div class="baloon1">${display}</div>`
+        var pattern1 = pattern.toLowerCase();
+        var display1 = display.toLowerCase();
+        console.log(display)
+        
+        const html = `<div class="baloon1">${display1}</div>`
         $(".chat-container").append(html)
         $(".user_textarea").fadeOut('fast');
         $("html, body").animate({ scrollTop: $(document).height() }, 500); // force the page to scroll down
@@ -231,15 +235,15 @@ $(function () {
                 isSharing = false;
                 shareCount = 0;
             } else {
-                let data = search_juvy_reply_in_sharing(sharing_response, pattern); // "somethingShared" ung pattern na pag nag share na si user ng something kakemehan nya
+                let data = search_juvy_reply_in_sharing(sharing_response, pattern1); // "somethingShared" ung pattern na pag nag share na si user ng something kakemehan nya
                 let say = data['template'][Math.floor((Math.random() * data['template'].length))];
-                juvy_say(say, data, pattern);
+                juvy_say(say, data, pattern1);
                 shareCount += 1;
             }
         } else {
-            let data = search_matching(aiml, pattern);
+            let data = search_matching(aiml, pattern1);
             let say = data['template'][Math.floor((Math.random() * data['template'].length))];
-            juvy_say(say, data, pattern);
+            juvy_say(say, data, pattern1);
         }
     }
 

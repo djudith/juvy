@@ -23,7 +23,7 @@ $(function () {
     })
 
     // for viewing the credits of song
-    $(".btnViewCredits").click(function (e) {
+    $(".btnViewCreditsVideo").click(function (e) {
         e.preventDefault();
         var x = $(this)
         if (x.text() === "View Credits") {
@@ -59,6 +59,14 @@ $(function () {
         }
         $("#videoModal > .modal-content").append(content);
     }
+    // choosing a song
+    $("#videoModal").delegate(".play_video_btn", 'click', function () {
+        $(".play_video_bg").fadeIn()
+        $(".play_video_bg p.play_video_title").text($(this).data("videotitle"))
+        $(".play_video_bg span.uploaded_by").text($(this).data('uploaded_by'));
+        $(".play_video_bg span.source").text($(this).data('source'));
+        $(".play_video_bg span.type_of_cc").text($(this).data('type_of_cc'));
+    })
 
     // stop the sound
     function stopAllvideo() {
@@ -66,7 +74,7 @@ $(function () {
         $("#videoIframe").attr('src', '');
         // hide the credits
         $(".creditsList").slideUp();
-        $(".btnViewCredits").text("View Credits");
+        $(".btnViewCreditsVideo").text("View Credits");
     }
 
     // the stop button in playing video

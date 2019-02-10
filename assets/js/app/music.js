@@ -27,7 +27,7 @@ $(function () {
     })
 
     // for viewing the credits of song
-    $(".btnViewCredits").click(function (e) {
+    $(".btnViewCreditsMusic").click(function (e) {
         e.preventDefault();
         var x = $(this)
         if (x.text() === "View Credits") {
