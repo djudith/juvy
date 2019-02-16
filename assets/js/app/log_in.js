@@ -1,4 +1,12 @@
 $(function () {
+
+    
+    if (localStorage.getItem("user_type") == 1) {
+        location.href = "admin.html"
+    } else {
+        isLoggedInHome();
+    }
+
     $("#loginForm").submit(function (e) {
         e.preventDefault();
         const serial = $(this).serialize();

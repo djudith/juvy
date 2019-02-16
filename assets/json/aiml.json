@@ -164,6 +164,16 @@
         "nextPattern": []
     },
 
+    {
+        "pattern": "not, same, no, hindi",
+        "template": [
+            "Aww, nalungkot naman ako dun di bale may iba pa namang pwedeng gawin. Anong gusto mo? Magkwento, makinig ng music o manuod ng video?",
+            "Ok lang yun, subukan naman naten yung iba. Baka trip mo %cs% magshare, manuod ng video o makinig ng music?"
+        ],
+        "return": "txtbox",
+        "nextPattern": []
+    },
+
 
     {
         "pattern": "bye,goodbye,paalam,babye,wala,ayoko,none,maya,saka,chaka",

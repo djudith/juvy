@@ -3,8 +3,8 @@
 <script>document.write(head)</script>
 
 <style>
-  #unverifiedAccountDiv{
-    display: none!important;
+  #unverifiedAccountDiv {
+    display: none !important;
   }
 </style>
 
@@ -54,3 +54,12 @@
 
 
 <script>document.write(foot)</script>
+
+<script>
+
+  if (localStorage.getItem("user_type") == 1) {
+    location.href = "admin.html"
+  } else {
+    isLoggedInHome();
+  }
+</script>
