@@ -387,6 +387,17 @@ $(function () {
         }
     });
 
+    $(".shareCancel").click(function (e) {
+        e.preventDefault();
+        isSharing = false; // reset sharing conditions
+        shareCount = 0; // reset sharing conditions
+        var pattern = "c4nc3l$h4r!ng" // eto yun pattern sa aiml.json na pupuntahan pag cinancel
+        var display = "Di ko nalang pala muna isheshare"; // eto yung lalabas na sinabe ni user if niclick nyaung cancel.
+        user_say(pattern, display)
+        $("#reply_txtbox").val('').detach().prependTo('.user_textarea > .d-flex ') // empty yung textbox tapos ibalik sa dati nyang puwesto na nasababa..
+        $('#sharingTipsModal').modal('close');
+        });
+
     // pagka type palang ni user, mag oopen na ung modal ng sharing para fullscren ung sharing nya
     $("#reply_txtbox").keydown(function () {
         if (sharing) {

@@ -59,6 +59,18 @@ $(document).ready(function () {
 
     }
 
+    $("#darkModeChk").change(function (e) {
+        e.preventDefault();
+        if ($(this).is(":checked")) {
+            localStorage.setItem("darkmode", "on"); // the settings is being saved inside the localstorage 
+						    //(dba eto ung 'mini storage' ng browser na ginamit ni 						    // juvy in many things. google js localstorage for more explanation)
+        } else {
+            localStorage.setItem("darkmode", "off");
+        }
+        toggleDarkMode();
+    });
+
+    toggleDarkMode();
 });
 
 
@@ -67,7 +79,9 @@ $(document).ajaxStart(function () {
     NProgress.start()
 });
 $(document).ajaxComplete(function () {
-    NProgress.done()
+    NProgress.done();
+    toggleDarkMode(); // every ajax, lets call again the function 
+		      //in case juvy missed to add dark-mode in some elements
 });
 const sys_alert = (title, message, cb) => {
     alertify.alert(title, message, cb);
@@ -129,6 +143,21 @@ const isLoggedInHome = () => {
         }
     }
 }
+
+const toggleDarkMode = () => {
+    var settings = localStorage.getItem("darkmode");
+    if (settings == 'on') {
+        $("*").addClass('juvy-dark-mode'); // if the switch is on we added dark-mode css class to all (*) element
+        setTimeout(() => {
+            $("*").addClass('juvy-dark-mode');
+        }, 1000);
+        $("#darkModeChk").attr('checked', true);
+    } else {
+        $("*").removeClass('juvy-dark-mode');  // remove the dark-mode class to all element if switch off
+        $("#darkModeChk").attr('checked', false);
+    }
+}
+
 const displayUser = () => {
     $(".sidenav .name").html(localStorage.getItem("username"));
     $(".sidenav .email").html(localStorage.getItem("email"));
@@ -141,6 +170,12 @@ const logout = () => {
     localStorage.removeItem("gender");
     localStorage.removeItem("enabled");
     sessionStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("darkmode");
+    localStorage.removeItem("password");
+    localStorage.removeItem("usertype");
+    localStorage.removeItem("user_type");
+    localStorage.removeItem("juvy_avatar"); // added so that every logout, 
+					// settings will be removed also in the localstorage
     location.href = "index.html";
 }
 function refreshVerified() {

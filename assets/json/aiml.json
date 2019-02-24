@@ -149,11 +149,57 @@
     {
         "pattern": "donevid",
         "template": [
-            "So kamusta ang panunuod %cs% >> Nakatulong ba kahit papaano?"
+            "So kamusta ang panunuod %cs% >> Nakatulong ba kahit papaano?",
+
         ],
         "return": "txtbox",
         "nextPattern": []
 },
+
+{
+    "pattern": "c4nc3l$h4r!ng",
+    "template": [
+        "Ah wala ka sa mood magshare? Gusto mo ba music or manuod nalang %cs%?",
+        "Ay di mo ba trip magkweno ngayon %cs%? So ano gusto mo music or videos?",
+        "Ah so ayaw mo pa magkwento? Ok lang yan %cs%, libangin mo sarili mo pwede ka nuod ng video o kaya makinig ng music."
+    ],
+    "return": "txtbox",
+    "nextPattern": [
+        "usap",
+        "share",
+        "talk",
+        "kwento",
+        "kuwento",
+        "music",
+        "tugtog",
+        "kinig",
+        "kanta",
+        "video",
+        "nuod",
+        "bye",
+        "goodbye",
+        "paalam",
+        "babye"
+    ]
+},
+{
+    "pattern": "cancelaud",
+    "template": [
+        "Mukang di mo trip music? >> gusto mo ba magshare or manuod nalang %cs%?"
+    ],
+    "return": "txtbox",
+    "nextPattern": []
+},
+{
+    "pattern": "cancelvid",
+    "template": [
+        "Ayaw mo ba manud %cs% >> gusto mo ba magshare or manuod nalang %cs%?"
+    ],
+    "return": "txtbox",
+    "nextPattern": []
+},
+
+
     {
         "pattern": "ok,feel better,felt better,better",
         "template": [

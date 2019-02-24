@@ -20,6 +20,7 @@ $(function () {
             success: function (data) {
                 if (data.success == 1) {
                     sys_success('Yey! Your password has been updated.');
+                    localStorage.setItem("password", $("input[name='new_password']").val());
                     setTimeout(() => {
                         location.href = "account.html"
                     }, 3000);

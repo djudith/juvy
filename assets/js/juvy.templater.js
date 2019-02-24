@@ -12,7 +12,7 @@ const head = `
         <link rel="icon" href="./assets/img/icon.png">
         <title>Juvy | AI Companion</title>
     </head>
-    <body data-base_url="http://localhost/juvy/backend/">`;
+    <body data-base_url="https://juvy101.000webhostapp.com/backend/">`;
 
 
 
@@ -85,6 +85,18 @@ const sidenav = `
     <!-- <li><a class="waves-effect waves-theme-gradient" href="index.html"><i class="material-icons">sentiment_very_satisfied</i>Juvy</a></li>
     <li><a class="waves-effect waves-theme-gradient" href="index.html"><i class="material-icons">settings</i>Settings</a></li> -->
     <li><a class="waves-effect waves-theme-gradient logoutBtn" ><i class="material-icons">exit_to_app</i>Logout</a></li>
+    <li>
+        <a href="javascript:void(0)">Dark Mode
+            <div class="switch right">
+                <label>
+                Off
+                <input type="checkbox" id="darkModeChk">
+                <span class="lever"></span>
+                On
+                </label>
+            </div>
+        </a>
+    </li>
 </ul>`;
 
 const bottom_nav = `

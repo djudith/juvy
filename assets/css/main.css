@@ -169,3 +169,31 @@ body {
     text-align: center;
     color: white;
 }
+
+body.juvy-dark-mode, 
+.sidenav.juvy-dark-mode, 
+.sidenav.juvy-dark-mode a, 
+.modal-content.juvy-dark-mode, 
+.modal-footer.juvy-dark-mode, 
+.play_music_bg.juvy-dark-mode, 
+.play_video_bg.juvy-dark-mode{
+    background: #333!important;
+    color: #fff!important;
+}
+.bottom_tabs.juvy-dark-mode .tab, 
+.bottom_tabs.juvy-dark-mode .tab a, 
+.card-content.juvy-dark-mode,
+.bottom_tabs.juvy-dark-mode{
+    background: #222!important;
+    color: #fff;
+}
+.btn-flat.juvy-dark-mode, 
+input.juvy-dark-mode, 
+textarea.juvy-dark-mode, 
+.sidenav.juvy-dark-mode li > a > i.material-icons{
+    color: #fff;
+}
+#reply_txtbox.juvy-dark-mode, 
+#answerContainerOption.juvy-dark-mode > .chat_user_btn{
+    color: #000!important;
+}

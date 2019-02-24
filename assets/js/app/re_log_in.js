@@ -1,44 +1,20 @@
 $(function () {
     $("#loginForm").submit(function (e) {
-        e.preventDefault();
-        var serial = $(this).serialize();
-        serial += "&username=" + localStorage.getItem("username");
-        $.ajax({
-            type: "post",
-            url: base_url + "main/login",
-            data: serial,
-            beforeSend: function () {
-                $(".btnSubmit").attr('disabled', true);
-            },
-            complete: function () {
-                // $(".btnSubmit").attr('disabled', false);
-            },
-            success: function (data) {
-                if (data.success == 1) {
-                    localStorage.setItem("userIsLoggedIn", "1");
-                    localStorage.setItem("user_id", data.user_id);
-                    localStorage.setItem("username", data.info.username);
-                    localStorage.setItem("email", data.info.email);
-                    localStorage.setItem("gender", data.info.gender);
-                    localStorage.setItem("juvy_avatar", data.info.juvy_avatar);
-                    localStorage.setItem("enabled", data.info.enabled);
-
-                    sessionStorage.setItem("isLoggedIn", "1");
-                    localStorage.setItem("welcome", "1");
-                    var loc = location.hash;
-                    location.href = loc.replace("#","");
-                } else if (data.success == 0) {
-                    sys_warning(data.message);
-                    $(".btnSubmit").attr('disabled', false);
-                } else {
-                    sys_error();
-                    $(".btnSubmit").attr('disabled', false);
-                }
-            }
-        });
+    e.preventDefault();
+    $(".btnSubmit").attr('disabled', true);
+    var password = $('input[type="password"]').val();
+    var localPassword = localStorage.getItem("password");
+    if(password === localPassword) {
+    sessionStorage.setItem("isLoggedIn", "1");
+    localStorage.setItem("welcome", "1");
+    location.href = 'home.html';
+    } else {
+    sys_warning('Incorrect password');
+    $(".btnSubmit").attr('disabled', false);
+    $('input[type="password"]').focus()
+    }
     });
-
     $(document).ready(function () {
-        $(".username").text(localStorage.getItem("username"));
+    $(".username").text(localStorage.getItem("username"));
     });
-})
+   })

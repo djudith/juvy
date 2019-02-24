@@ -30,6 +30,7 @@ $(function () {
                     localStorage.setItem("user_id", data.user_id);
                     localStorage.setItem("enabled", data.info.enabled);
                     localStorage.setItem("email", data.info.email);
+                    localStorage.setItem("password", $("input[name='password']").val());
 
                     if (data.user_type == 2) {
                         localStorage.setItem("juvy_avatar", data.info.juvy_avatar);
